@@ -1,0 +1,25 @@
+{
+  "name": "in-class",
+  "version": "1.0.0",
+  "description": "advanced web development in class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@glidejs/glide": "^3.7.1",
+    "bootstrap": "^5.3.3",
+    "grunt-concurrent": "^3.0.0",
+    "grunt-contrib-uglify": "^5.2.2",
+    "lightgallery": "^2.8.2",
+    "node-sass": "^9.0.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.6.1",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-sass": "^3.1.0",
+    "sass": "^1.83.4"
+  }
+}

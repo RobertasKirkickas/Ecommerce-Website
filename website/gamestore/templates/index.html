@@ -4,14 +4,117 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Game Store</title>
-    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
-  </head>
-  <body>
-    <h1>Game Store</h1>
 
-    <script src="{% static 'js/script.js' %}"></script>
-    <img src="{% static 'images/logo.png' %}" alt="logo" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.0/css/glide.core.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.0/css/glide.theme.min.css" />
+
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+
+    <script src="{% static 'js/scripts-vendor.min.js' %}"></script>
+    <script src="{% static 'js/scripts.min.js' %}"></script>
+    {% comment %} <img src="{% static 'images/logo.png' %}" alt="logo" /> {% endcomment %}
+
+    <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body id="page-home">
+    <header>
+      <div class="page-header-top text-center text-md-start">
+        <a href="index.html"><img src="./images/logo.jpg" alt="StudentEat" /></a>
+      </div>
+      <nav class="navbar navbar-expand-lg mb-4">
+        <div class="container">
+          <!-- <a class="navbar-brand" href="index.html">StudentEat</a> -->
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="categories.html">Categories</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+              </li>
+            </ul>
+            <form action="search.html" method="get" class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Cake..." aria- label="Search" />
+              <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <div class="recipe-slide-card">
+                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/recipe-images/cake.jpg' %}');"></div>
+                <h3>Recipe name</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="recipe-slide-card">
+                <div class="recipe-slide-card-img" style="background-image: url('./recipe-images/salad.jpg');"></div>
+                <h3>Recipe name</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="recipe-slide-card">
+                <div class="recipe-slide-card-img" style="background-image: url('./recipe-images/steak.jpg');"></div>
+                <h3>Recipe name</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="recipe-slide-card">
+                <div class="recipe-slide-card-img" style="background-image: url('./recipe-images/ice-cream.jpg');"></div>
+                <h3>Recipe name</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="recipe-slide-card">
+                <div class="recipe-slide-card-img" style="background-image: url('./recipe-images/burger.jpg');"></div>
+                <h3>Recipe name</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="recipe-slide-card">
+                <div class="recipe-slide-card-img" style="background-image: url('./recipe-images/doughnut.jpg');"></div>
+                <h3>Recipe name</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="recipe-slide-card">
+                <div class="recipe-slide-card-img" style="background-image: url('./recipe-images/pizza.jpg');"></div>
+                <h3>Recipe name</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="recipe-slide-card">
+                <div class="recipe-slide-card-img" style="background-image: url('./recipe-images/hotdog.jpg');"></div>
+                <h3>Recipe name</h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--left btn-l" data-glide-dir="<"><i class="fa-solid fa-circle-arrow-left"></i></button>
+          <button class="glide__arrow glide__arrow--right btn-r" data-glide-dir=">"><i class="fa-solid fa-circle-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.0/glide.min.js"></script>
+
+    <script>
+      home.init()
+    </script>
   </body>
 </html>

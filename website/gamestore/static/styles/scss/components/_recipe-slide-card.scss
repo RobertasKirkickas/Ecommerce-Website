@@ -1,0 +1,26 @@
+.recipe-slide-card .recipe-slide-card-img {
+    height: 200px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    }
+
+    .recipe-slide-card {
+        margin: 10px;
+        background-color: #FFF;
+        box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+        padding: 12px;
+        text-align: center;
+        border: solid 1px #eaeaea;
+        border-radius: 3px;
+        }
+
+        .recipe-slide-card h3 {
+            font-size: 1.1rem;
+            padding-top: 10px;
+            color: $primary-color;
+            }
+            

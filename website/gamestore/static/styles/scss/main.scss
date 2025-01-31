@@ -1,0 +1,39 @@
+// Abstracts
+@import "abstracts/variables";
+
+// Vendors
+@import "vendors/bootstrap";
+// @import "../node_modules/lightgallery/scss/lightgallery-bundle.scss";
+
+// Base
+
+// Layout
+@import "layout/header";
+@import "layout/navigation";
+
+
+// Components
+@import "components/recipe-slide-card";
+@import "components/headings";
+@import "components/recipe-card";
+@import "components/buttons";
+@import "components/recipe";
+
+// Pages
+@import "pages/login";
+
+// Themes
+@import "themes/theme";
+
+
+
+
+.btn-r {
+    background-color: black;
+    color: rgb(10, 193, 38);
+}
+
+.btn-l {
+    background-color: black;
+    color: rgb(209, 0, 0)
+}
