@@ -6,7 +6,7 @@ class Games(models.Model):
     game_title = models.CharField(max_length=64)
     game_genre = models.CharField(max_length=64)
     game_platform = models.CharField(max_length=64)
-    game_price = models.IntegerField()
+    game_price = models.DecimalField(max_digits=5, decimal_places=2)
 
 
     def __str__(self):
