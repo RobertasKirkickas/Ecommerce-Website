@@ -2,10 +2,10 @@ h3 {
     color: $primary-color;
 }
 
-.recipe-card {
+.game-card {
     margin: 0 0 30px 0;
     background-color: #FFF;
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0 , 0.15);
+    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
     padding: 12px;
     text-align: center;
     border: solid 1px #eaeaea;
@@ -13,7 +13,7 @@ h3 {
 }
 
 
-.recipe-card-image {
+.game-card-image {
     height: 200px;
     background-repeat: no-repeat;
     background-position: center center;
@@ -25,7 +25,7 @@ h3 {
     a {
         display: block;
         height: 200px;
-    
+
         h3 {
             font-size: 1.1rem;
             padding-top: 10px;
@@ -33,10 +33,9 @@ h3 {
             color: $primary-color;
         }
     }
-    
+
 }
 
 a {
     text-decoration: none;
 }
-

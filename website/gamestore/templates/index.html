@@ -34,7 +34,7 @@
                 <a class="nav-link" href="/games">Browse Store</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="/contact">Login</a>
+                <a class="nav-link" href="/contact">Contact</a>
               </li>
             </ul>
             <form action="search.html" method="get" class="d-flex" role="search">
@@ -47,54 +47,55 @@
     </header>
 
     <div class="container">
+      <h1 class="mt-4 mb-4">Trending Games</h1>
       <div class="glide">
         <div class="glide__track" data-glide-el="track">
           <ul class="glide__slides">
             <li class="glide__slide">
-              <div class="recipe-slide-card">
-                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/game-images/elden-ring.jpg' %}');"></div>
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/elden-ring.jpg' %}');"></div>
                 <h3>Game Title</h3>
               </div>
             </li>
             <li class="glide__slide">
-              <div class="recipe-slide-card">
-                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/game-images/cyberpunk.jpg' %}');"></div>
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/cyberpunk.jpg' %}');"></div>
                 <h3>Game Title</h3>
               </div>
             </li>
             <li class="glide__slide">
-              <div class="recipe-slide-card">
-                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/game-images/diablo.png' %}');"></div>
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/diablo.png' %}');"></div>
                 <h3>Game Title</h3>
               </div>
             </li>
             <li class="glide__slide">
-              <div class="recipe-slide-card">
-                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/game-images/ice-cream.jpg' %}');"></div>
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/ice-cream.jpg' %}');"></div>
                 <h3>Game Title</h3>
               </div>
             </li>
             <li class="glide__slide">
-              <div class="recipe-slide-card">
-                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/game-images/burger.jpg' %}');"></div>
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/burger.jpg' %}');"></div>
                 <h3>Game Title</h3>
               </div>
             </li>
             <li class="glide__slide">
-              <div class="recipe-slide-card">
-                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/game-images/doughnut.jpg' %}');"></div>
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/doughnut.jpg' %}');"></div>
                 <h3>Game Title</h3>
               </div>
             </li>
             <li class="glide__slide">
-              <div class="recipe-slide-card">
-                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/game-images/pizza.jpg' %}');"></div>
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/pizza.jpg' %}');"></div>
                 <h3>Game Title</h3>
               </div>
             </li>
             <li class="glide__slide">
-              <div class="recipe-slide-card">
-                <div class="recipe-slide-card-img" style="background-image: url('{% static './images/game-images/hotdog.jpg' %}');"></div>
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/hotdog.jpg' %}');"></div>
                 <h3>Game Title</h3>
               </div>
             </li>
@@ -107,6 +108,22 @@
       </div>
     </div>
 
+    <div class="container">
+      <h1 class="mt-4 mb-4">Browse Our Games</h1>
+
+      <div class="row">
+        {% for game in games %}
+          <div class="col-md-3">
+            <div class="game-card">
+              <div class="game-card-image" style="background-image: url('{% static './images/game-images/{{ game.game_title }}.toLowerCase().jpg' %}');">
+                <a href="game.html"></a>
+              </div>
+              <a href="game.html"><h3>{{ game.game_title }} (£{{ game.game_price }})</h3></a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.0/glide.min.js"></script>
 
     <script>

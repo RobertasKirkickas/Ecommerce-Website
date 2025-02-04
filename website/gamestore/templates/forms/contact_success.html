@@ -12,8 +12,6 @@
     <script src="{% static 'js/scripts-vendor.min.js' %}"></script>
     <script src="{% static 'js/scripts.min.js' %}"></script>
     {% comment %} <img src="{% static 'images/logo.png' %}" alt="logo" /> {% endcomment %}
-
-    <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -44,13 +42,7 @@
     </header>
 
     <div class="container">
-      <h1>Contact Us</h1>
-
-      <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
-      </form>
+      <h1>Email Sent</h1>
     </div>
   </body>
 </html>

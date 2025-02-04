@@ -1,3 +1,6 @@
+const path = require('path');
+const pathToStatic = path.resolve(__dirname, '../static');
+
 module.exports = function (grunt) {
     const sass = require('sass');
     grunt.loadNpmTasks('grunt-sass');
@@ -19,7 +22,7 @@ module.exports = function (grunt) {
                     implementation: sass,
                 },
                 files: {
-                    './static/styles/styles.css': './static/styles/scss/main.scss',
+                    [`${pathToStatic}/styles/styles.css`]: `${pathToStatic}/styles/scss/main.scss`,
                 },
             },
         },
@@ -33,7 +36,7 @@ module.exports = function (grunt) {
                     mangle: false,
                 },
                 files: {
-                    './static/js/scripts.min.js': ['./static/js/scripts/**/*.js'],
+                    [`${pathToStatic}/js/scripts.min.js`]: [`${pathToStatic}/js/scripts/**/*.js`],
                 },
             },
             vendor: {
@@ -43,8 +46,9 @@ module.exports = function (grunt) {
                     mangle: false,
                 },
                 files: {
-                    './static/js/scripts-vendor.min.js': ['./node_modules/bootstrap/dist/js/bootstrap.min.js',
-                        "./node_modules/lightgallery/lightgallery.min.js",
+                    [`${pathToStatic}/js/scripts-vendor.min.js`]: [
+                        './node_modules/bootstrap/dist/js/bootstrap.min.js',
+                        './node_modules/lightgallery/lightgallery.min.js',
                     ],
                 },
             },
@@ -53,14 +57,14 @@ module.exports = function (grunt) {
         // Watch Task
         watch: {
             scss: {
-                files: ['./static/styles/scss/**/*.scss'],
+                files: [`${pathToStatic}/styles/scss/**/*.scss`],
                 tasks: ['sass:main'],
                 options: {
                     spawn: false,
                 },
             },
             js: {
-                files: ['./static/js/scripts/**/*.js'],
+                files: [`${pathToStatic}/js/scripts/**/*.js`],
                 tasks: ['uglify:main'],
                 options: {
                     spawn: false,
