@@ -1,0 +1,83 @@
+// Main footer container
+.site-footer {
+    background-color: $bg-color;
+    color: $primary-color;
+    padding: 3rem 0 1rem;
+
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    // Three-column grid layout for footer sections
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 2rem;
+
+        // Stack columns on mobile
+        @media screen and (max-width: 768px) {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+    }
+
+    // Individual footer column styling
+    .footer-section {
+        h3 {
+            color: $primary-color;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            li {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        // Footer link hover effects
+        a {
+            color: $primary-color;
+            text-decoration: none;
+            transition: color 0.3s ease;
+
+            &:hover {
+                color: #199cc4;
+            }
+        }
+    }
+
+    // Brand logo sizing
+    .footer-logo {
+        max-width: 150px;
+        margin-bottom: 1rem;
+    }
+
+    // Social media icons container
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        font-size: 1.5rem;
+
+        // Center icons on mobile
+        @media screen and (max-width: 768px) {
+            justify-content: center;
+        }
+    }
+
+    // Copyright section with top border
+    .footer-bottom {
+        border-top: 1px solid $secondary-color;
+        padding-top: 1rem;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+}
