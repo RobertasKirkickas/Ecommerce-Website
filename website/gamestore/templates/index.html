@@ -115,7 +115,7 @@
         {% for game in games %}
           <div class="col-md-3">
             <div class="game-card">
-              <div class="game-card-image" style="background-image: url('{% static './images/game-images/{{ game.game_title }}.toLowerCase().jpg' %}');">
+              <div class="game-card-image" style="background-image: url('{% static game.image_url %}');">
                 <a href="game.html"></a>
               </div>
               <a href="game.html"><h3>{{ game.game_title }} (£{{ game.game_price }})</h3></a>
