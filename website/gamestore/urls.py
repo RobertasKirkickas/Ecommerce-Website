@@ -1,12 +1,10 @@
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
-    path('', views.home),
-    path('checkout/', views.checkout),
-    path('games/', views.games),
-    path('contact/', views.contact),
-
-
+    path('', views.home, name='home'),
+    path('contact/', views.contact_view, name='contact'),
+    path('contact/success/', views.contact_success_view, name='contact-success'),
+    path('games/', views.games, name='games'),
+    path('checkout/', views.checkout, name='checkout'),  # Ensure checkout is mapped
 ]

@@ -4,14 +4,162 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Game Store</title>
-    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
-  </head>
-  <body>
-    <h1>Game Store</h1>
 
-    <script src="{% static 'js/script.js' %}"></script>
-    <img src="{% static 'images/logo.png' %}" alt="logo" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.0/css/glide.core.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.0/css/glide.theme.min.css" />
+
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+
+    <script src="{% static 'js/scripts-vendor.min.js' %}"></script>
+    <script src="{% static 'js/scripts.min.js' %}"></script>
+    {% comment %} <img src="{% static 'images/logo.png' %}" alt="logo" /> {% endcomment %}
+
+    <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body id="page-home">
+    <header>
+      <nav class="navbar navbar-expand-lg mb-4">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/games">Browse Store</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+              </li>
+            </ul>
+            <form action="search.html" method="get" class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search..." aria- label="Search" />
+              <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1 class="mt-4 mb-4">Trending Games</h1>
+      <div class="glide">
+        <div class="glide__track" data-glide-el="track">
+          <ul class="glide__slides">
+            <li class="glide__slide">
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/elden-ring.jpg' %}');"></div>
+                <h3>Game Title</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/cyberpunk.jpg' %}');"></div>
+                <h3>Game Title</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/diablo.png' %}');"></div>
+                <h3>Game Title</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/ice-cream.jpg' %}');"></div>
+                <h3>Game Title</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/burger.jpg' %}');"></div>
+                <h3>Game Title</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/doughnut.jpg' %}');"></div>
+                <h3>Game Title</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/pizza.jpg' %}');"></div>
+                <h3>Game Title</h3>
+              </div>
+            </li>
+            <li class="glide__slide">
+              <div class="game-slide-card">
+                <div class="game-slide-card-img" style="background-image: url('{% static './images/game-images/hotdog.jpg' %}');"></div>
+                <h3>Game Title</h3>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="glide__arrows" data-glide-el="controls">
+          <button class="glide__arrow glide__arrow--left btn-l" data-glide-dir="<"><i class="fa-solid fa-circle-arrow-left"></i></button>
+          <button class="glide__arrow glide__arrow--right btn-r" data-glide-dir=">"><i class="fa-solid fa-circle-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1 class="mt-4 mb-4">Browse Our Games</h1>
+
+      <div class="row">
+        {% for game in games %}
+          <div class="col-md-3">
+            <div class="game-card">
+              <div class="game-card-image" style="background-image: url('{% static game.image_url %}');">
+                <a href="game.html"></a>
+              </div>
+              <a href="game.html"><h5>{{ game.game_title }} (£{{ game.game_price }})</h5></a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <img src="./images/logo.png" alt="Game Arena" class="footer-logo" />
+            <p>Find Your Favourite Games - CHEAPER!</p>
+          </div>
+          <div class="footer-section">
+            <h3>Links</h3>
+            <ul>
+              <li>
+                <a href="index.html">Home</a>
+              </li>
+              <li>
+                <a href="contact.html">Contact</a>
+              </li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Socials</h3>
+            <div class="social-links">
+              <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+              <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Game Arena</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.0/glide.min.js"></script>
+    <script>
+      home.init()
+    </script>
   </body>
 </html>

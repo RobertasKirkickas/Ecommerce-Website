@@ -1,11 +1,56 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Game Store</title>
-</head>
-<body>
-    
-</body>
+
+    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+
+    <script src="{% static 'js/scripts-vendor.min.js' %}"></script>
+    <script src="{% static 'js/scripts.min.js' %}"></script>
+    {% comment %} <img src="{% static 'images/logo.png' %}" alt="logo" /> {% endcomment %}
+
+    <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg mb-4">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+
+          <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/games">Browse Store</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+              </li>
+            </ul>
+            <form action="search.html" method="get" class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search..." aria- label="Search" />
+              <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container">
+      <h1>Contact Us</h1>
+
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </body>
 </html>
