@@ -1,3 +1,24 @@
 .btn.btn {
     background-color: $secondary-color;
 }
+
+.btn-r {
+    background-color: #393e4f53;
+    color: $primary-color;
+
+
+    &:hover {
+        border-color: rgb(4, 243, 40);
+        color: rgb(4, 243, 40);
+    }
+}
+
+.btn-l {
+    background-color: #393e4f53;
+    color: $primary-color;
+
+    &:hover {
+        border-color: rgb(209, 0, 0);
+        color: rgb(209, 0, 0);
+    }
+}
