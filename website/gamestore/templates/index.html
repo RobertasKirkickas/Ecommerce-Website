@@ -23,15 +23,13 @@
     <header>
       <nav class="navbar navbar-expand-lg mb-4">
         <div class="container">
+          <img src="{% static 'images/logo.png' %}" alt="logo" />
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 
           <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
                 <a class="nav-link" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/games">Browse Store</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="/contact">Contact</a>
@@ -102,8 +100,8 @@
           </ul>
         </div>
         <div class="glide__arrows" data-glide-el="controls">
-          <button class="glide__arrow glide__arrow--left btn-l" data-glide-dir="<"><i class="fa-solid fa-circle-arrow-left"></i></button>
-          <button class="glide__arrow glide__arrow--right btn-r" data-glide-dir=">"><i class="fa-solid fa-circle-arrow-right"></i></button>
+          <button class="glide__arrow glide__arrow--left btn btn-l fa-solid fa-circle-arrow-left" data-glide-dir="<"></button>
+          <button class="glide__arrow glide__arrow--right btn btn-r fa-solid fa-circle-arrow-right" data-glide-dir=">"></button>
         </div>
       </div>
     </div>
@@ -129,8 +127,8 @@
       <div class="container">
         <div class="footer-content">
           <div class="footer-section">
-            <img src="./images/logo.png" alt="Game Arena" class="footer-logo" />
-            <p>Find Your Favourite Games - CHEAPER!</p>
+            <img src="{% static 'images/logo.png' %}" alt="Game Arena" class="footer-logo" />
+            <p>Find Your Favourite Games!</p>
           </div>
           <div class="footer-section">
             <h3>Links</h3>
