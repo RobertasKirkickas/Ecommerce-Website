@@ -15,8 +15,8 @@
     <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
   </head>
 
-  <body id="contact-page">
-    <header class="nav-header">
+  <body id="logout-page">
+    <header>
       <nav class="navbar navbar-expand-lg mb-4">
         {% if user.is_authenticated %}
           <p>Welcome, {{ request.user.username }}</p>
@@ -42,7 +42,6 @@
               <li class="nav-item">
                 {% if user.is_authenticated %}
                   {% csrf_token %}
-                  <a class="nav-link" href="{% url 'protected' %}">Protected Page</a>
                 {% else %}
                   <a class="nav-link" href="{% url 'login' %}">Login</a>
                 {% endif %}
@@ -58,13 +57,20 @@
     </header>
 
     <div class="container">
-      <h1>Contact Us</h1>
-
-      <form method="POST" class="form-contact">
+      <h2>Logout</h2>
+      <p>Are you sure you want to logout?</p>
+      <form mathod="POST" action="{% url 'logout' %}">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">Submit</button>
+        <button class="btn btn-outline-dark" type="submit">Logout</button>
+        <a href="{% url 'home' %}">Cancel</a>
       </form>
+      {% comment %}Checking for any error messages{% endcomment %}
+      {% if error %}
+        <p class="error">{{ error }}</p>
+      {% endif %}
+      <p>
+        Don't have an account? <a href="{% url 'register' %}">Register Here</a>
+      </p>
     </div>
 
     <footer class="site-footer">

@@ -15,8 +15,8 @@
     <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
   </head>
 
-  <body id="contact-page">
-    <header class="nav-header">
+  <body id="logout-page">
+    <header>
       <nav class="navbar navbar-expand-lg mb-4">
         {% if user.is_authenticated %}
           <p>Welcome, {{ request.user.username }}</p>
@@ -58,13 +58,8 @@
     </header>
 
     <div class="container">
-      <h1>Contact Us</h1>
-
-      <form method="POST" class="form-contact">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">Submit</button>
-      </form>
+      <h2>Protected Page</h2>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, numquam asperiores quis at voluptatum minima laborum commodi eligendi optio, molestiae nisi, blanditiis odio. Ut sequi molestiae veniam! Fugit, quisquam iste.</p>
     </div>
 
     <footer class="site-footer">

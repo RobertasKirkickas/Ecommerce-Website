@@ -15,8 +15,8 @@
     <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
   </head>
 
-  <body id="contact-page">
-    <header class="nav-header">
+  <body id="auth-page">
+    <header>
       <nav class="navbar navbar-expand-lg mb-4">
         {% if user.is_authenticated %}
           <p>Welcome, {{ request.user.username }}</p>
@@ -42,7 +42,6 @@
               <li class="nav-item">
                 {% if user.is_authenticated %}
                   {% csrf_token %}
-                  <a class="nav-link" href="{% url 'protected' %}">Protected Page</a>
                 {% else %}
                   <a class="nav-link" href="{% url 'login' %}">Login</a>
                 {% endif %}
@@ -58,12 +57,12 @@
     </header>
 
     <div class="container">
-      <h1>Contact Us</h1>
+      <h2>Register</h2>
 
-      <form method="POST" class="form-contact">
+      <form class="auth-form" method="POST" action="{% url 'register' %}">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn">Submit</button>
+        <button class="btn btn-outline-dark" type="submit">Register</button>
       </form>
     </div>
 
