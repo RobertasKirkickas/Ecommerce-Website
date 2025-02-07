@@ -14,7 +14,6 @@
 
     <script src="{% static 'js/scripts-vendor.min.js' %}"></script>
     <script src="{% static 'js/scripts.min.js' %}"></script>
-    {% comment %} <img src="{% static 'images/logo.png' %}" alt="logo" /> {% endcomment %}
 
     <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
   </head>
@@ -47,7 +46,7 @@
                 {% if user.is_authenticated %}
                   {% csrf_token %}
 
-                  <a class="nav-link" href="{% url 'protected' %}">Protected Page</a>
+                  <a class="nav-link" href="{% url 'ims' %}">Manage Games</a>
                 {% else %}
                   <a class="nav-link" href="{% url 'login' %}">Login</a>
                 {% endif %}

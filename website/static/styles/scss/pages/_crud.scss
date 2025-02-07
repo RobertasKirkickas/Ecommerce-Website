@@ -1,0 +1,89 @@
+body#crud-page {
+
+    input[type="text"],
+    input[type="number"]
+     {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0 20px;
+        border-radius: 5px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+    }
+
+    h1 {
+        color: $secondary-color;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    form.crud-form {
+        max-width: 600px;
+        margin: 0 auto 100px;
+        border: 1px solid #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+
+        label {
+            font-weight: bold;
+        }
+        
+
+
+
+
+        button {
+            margin: 5px;
+            background-color: $bg-color;
+            color: $primary-color;
+
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: $secondary-color;
+            color: $bg-color;
+        }
+    }
+
+    .error {
+        color: red;
+        margin-top: 10px;
+        margin: 10px 0 20px;
+    }
+}
+
+
+
+.btn-btn-upd {
+    margin: 5px;
+    color: $primary-color;
+
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn.btn-upd:hover {
+    background-color: #d29015;
+    color: $bg-color;
+}
+
+.btn-btn-del {
+    margin: 5px;
+    color: $primary-color;
+
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn.btn-del:hover {
+    background-color: #b80707;
+    color: $bg-color;
+}

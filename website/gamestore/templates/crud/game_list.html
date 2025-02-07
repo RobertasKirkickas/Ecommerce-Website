@@ -1,0 +1,45 @@
+{% extends 'crud/layout.html' %}
+
+{% block title %} Game Arena {% endblock %}
+
+{% block content %}
+<h1 class="text-center">All Games</h1>
+
+<div class="container">
+    
+<table class="table table-bordered table-striped text-center">
+<thead class="thead-dark">
+    <tr>
+        <th>Game ID</th>
+        <th>SKU</th>
+        <th>Title</th>
+        <th>Genre</th>
+        <th>Platform</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Actions</th>
+    </tr>
+</thead>
+<tbody>
+    {% for game in games %}
+    <tr>
+        <td> {{ game.game_id}} </td>
+        <td> {{ game.game_sku}} </td>
+        <td> {{ game.game_title}} </td>
+        <td> {{ game.game_genre}} </td>
+        <td> {{ game.game_platform}} </td>
+        <td> {{ game.game_price}} </td>
+        <td> {{ game.game_quantity}} </td>
+        <td>
+            <a href="{% url 'game_update' game.game_id%}" class="btn btn-upd">Update</a>
+            <a href="{% url 'game_delete' game.game_id%}" class="btn btn-del">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+
+</div>
+
+{% endblock %}
