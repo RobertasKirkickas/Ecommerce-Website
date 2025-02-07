@@ -1,5 +1,13 @@
 body#contact-page {
 
+    h1 {
+        color: $secondary-color;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
     form.form-contact {
         max-width: 400px;
         margin: 70px auto 100px;
@@ -20,7 +28,28 @@ body#contact-page {
             margin: 10px 0 20px;
             border-radius: 5px;
             box-sizing: border-box;
+            border: 1px solid #ddd;
         }
     }
 
+}
+
+/* Success page */
+
+.success-message {
+    text-align: center;
+    max-width: 400px;
+    margin: 250px auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+
+    p {
+        margin: 20px 0;
+    }
+
+    a {
+        color: $secondary-color;
+    }
 }
