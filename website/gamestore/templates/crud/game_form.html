@@ -1,0 +1,14 @@
+{% extends 'crud/layout.html' %}
+
+{% block title %}
+  Game Arena
+{% endblock %}
+
+{% block content %}
+  <h1 class="text-center">Game Form</h1>
+  <form method="POST" class="jumbotron">
+    {% csrf_token %}
+    {{ form }}
+    <button class="btn btn-success btn-block" type="submit">Save Game</button>
+  </form>
+{% endblock %}

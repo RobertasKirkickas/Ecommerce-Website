@@ -11,7 +11,7 @@ from django.views import View
 from django.contrib.auth.models import User
 # Import the RegisterForm from forms.py
 from .forms import RegisterForm
-
+from .forms import GamesForm
 
 # Normal pages
 def home(request):
@@ -75,10 +75,6 @@ def login_view(request):
     return render(request, 'accounts/login.html', {'error': error_message})
 
 
-
-
-
-
 def logout_view(request):
     if request.method == "POST":
         logout(request)
@@ -95,7 +91,7 @@ def logout_view(request):
 def home_view(request):
     return render(request, 'index.html')
 
-# Protected View
+# Protected View - Inventory Management System and etc.
 class ProtectedView(LoginRequiredMixin, View):
     login_url = '/login/'
     # 'next' - to redirect URL
@@ -103,3 +99,50 @@ class ProtectedView(LoginRequiredMixin, View):
 
     def get(self, request):
         return render(request, 'registration/protected.html')
+    
+
+
+# CRUD
+
+# Index view
+def game_index_view(request):
+    return render(request, 'crud/index.html')
+
+# Create View
+def game_create_view(request):
+    form = GamesForm()
+    if request.method == 'POST':
+        form = GamesForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('game_list')
+    return render(request, 'crud/game_form.html', {'form':form})
+
+
+# Read View
+def game_list_view(request):
+    games = Games.objects.all()
+    return render(request, 'crud/game_list.html', {'games':games})
+
+
+
+# Update View
+def game_update_view(request, game_id):
+    game = Games.objects.get(game_id=game_id)
+    form = GamesForm(instance=game)
+    if request.method == "POST":
+        form = GamesForm(request.POST, instance=game)
+        if form.is_valid():
+            form.save()
+            return redirect('game_list')
+    return render(request, 'crud/game_list.html', {'form':form})
+
+
+
+# Delete View
+def game_delete_view(request, game_id):
+    game = Games.objects.get(game_id=game_id)
+    if request.method == "POST":
+        game.delete()
+        return redirect('game_list')
+    return render(request, 'crud/game_confirm_delete.html', {'game': game})
