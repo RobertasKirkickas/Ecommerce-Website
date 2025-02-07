@@ -6,7 +6,7 @@
 
 {% block content %}
   <h1 class="text-center">Game Form</h1>
-  <form method="POST" class="jumbotron auth-form">
+  <form method="POST" class="crud-form">
     {% csrf_token %}
     {{ form }}
     <button class="btn btn-success btn-block" type="submit">Save</button>

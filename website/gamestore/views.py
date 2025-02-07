@@ -12,6 +12,7 @@ from django.contrib.auth.models import User
 # Import the RegisterForm from forms.py
 from .forms import RegisterForm
 from .forms import GamesForm
+# from .serialisers import gamesSerializers
 
 # Normal pages
 def home(request):
@@ -98,17 +99,19 @@ class ProtectedView(LoginRequiredMixin, View):
     redirect_field_name = 'redirect_to'
 
     def get(self, request):
-        return render(request, 'registration/protected.html')
+        return render(request, 'crud/index.html')
     
 
 
 # CRUD
 
 # Index view
+@login_required(login_url='/login/')
 def game_index_view(request):
     return render(request, 'crud/index.html')
 
 # Create View
+@login_required(login_url='/login/')
 def game_create_view(request):
     form = GamesForm()
     if request.method == 'POST':
@@ -120,6 +123,7 @@ def game_create_view(request):
 
 
 # Read View
+@login_required(login_url='/login/')
 def game_list_view(request):
     games = Games.objects.all()
     return render(request, 'crud/game_list.html', {'games':games})
@@ -127,6 +131,7 @@ def game_list_view(request):
 
 
 # Update View
+@login_required(login_url='/login/')
 def game_update_view(request, game_id):
     game = Games.objects.get(game_id=game_id)
     form = GamesForm(instance=game)
@@ -135,11 +140,12 @@ def game_update_view(request, game_id):
         if form.is_valid():
             form.save()
             return redirect('game_list')
-    return render(request, 'crud/game_list.html', {'form':form})
+    return render(request, 'crud/game_form.html', {'form':form})
 
 
 
 # Delete View
+@login_required(login_url='/login/')
 def game_delete_view(request, game_id):
     game = Games.objects.get(game_id=game_id)
     if request.method == "POST":

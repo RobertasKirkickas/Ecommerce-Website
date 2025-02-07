@@ -10,9 +10,9 @@
         Game Store
       {% endblock %}
     </title>
-    {% comment %} <link href="
+    <link href="
     https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css
-    " rel="stylesheet" /> {% endcomment %}
+    " rel="stylesheet" /> 
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
 
     <script src="{% static 'js/scripts-vendor.min.js' %}"></script>
@@ -28,7 +28,7 @@
     </style>
   </head>
 
-  <body id="auth-page">
+  <body id="crud-page" class="d-flex flex-column min-vh-100">
     <header class="nav-header">
       <nav class="navbar navbar-expand-lg mb-4">
         {% if user.is_authenticated %}
@@ -56,9 +56,6 @@
               {% if user.is_authenticated %}
                 {% csrf_token %}
 
-                <li class="nav-item">
-                  <a class="nav-link" href="{% url 'protected' %}">Protected Page</a>
-                </li>
                 <li class="nav-item">
                   <a class="nav-link" href="{% url 'game_create' %}">Add Game</a>
                 </li>
@@ -117,8 +114,8 @@
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-    {% comment %} <script src="
+   <script src="
 https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js
-"></script> {% endcomment %}
+"></script> 
   </body>
 </html>
