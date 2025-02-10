@@ -16,12 +16,10 @@ from .forms import GamesForm
 
 # Normal pages
 def home(request):
-    allGames = Games.objects.all()
-    return render(request, 'index.html', {'games': allGames})
+    all_games = Games.objects.all()
+    return render(request, 'index.html', {'games': all_games})
 
-def games(request):
-    allGames = Games.objects.all()
-    return render(request, 'games.html', {'games': allGames})
+
 
 def contact_view(request):
     if request.method == "POST":

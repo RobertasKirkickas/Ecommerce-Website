@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 
@@ -14,3 +15,12 @@ class Games(models.Model):
 
     def __str__(self):
         return self.game_title
+    
+    def get_total_price(self):
+        return self.game_price * self.game_quantity
+
+    def clean(self):
+        if self.game_price<0:
+            raise ValidationError('Price can not be negative')
+        if self.game_quantity<0:
+            raise ValidationError('Stock can not be negative')
