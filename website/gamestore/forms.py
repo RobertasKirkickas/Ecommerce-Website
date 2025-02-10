@@ -33,9 +33,8 @@ class RegisterForm(forms.ModelForm):
 class GamesForm(forms.ModelForm):
     class Meta:
         model = Games
-        fields = '__all__'
+        fields = ['game_sku', 'game_title', 'game_genre', 'game_platform', 'game_price', 'game_quantity']
         labels = {
-            'game_id': 'Game ID',
             'game_sku': 'SKU',
             'game_title': 'Title',
             'game_genre': 'Genre',
@@ -44,11 +43,10 @@ class GamesForm(forms.ModelForm):
             'game_quantity': 'Quantity',
         }
         widgets = {
-            'game_id': forms.NumberInput(attrs={'placeholder': 'e.g. 1', 'class':'form-ctontrol'}),
-            'game_sku': forms.TextInput(attrs={'placeholder': 'e.g. G0001', 'class':'form-ctontrol'}),
-            'game_title': forms.TextInput(attrs={'placeholder': 'e.g. Diablo IV', 'class':'form-ctontrol'}),
-            'game_genre': forms.TextInput(attrs={'placeholder': 'e.g. aRPG', 'class':'form-ctontrol'}),
-            'game_platform': forms.TextInput(attrs={'placeholder': 'e.g. PC', 'class':'form-ctontrol'}),
-            'game_price': forms.NumberInput(attrs={'placeholder': 'e.g. 15.99', 'class':'form-ctontrol'}),
-            'game_quantity': forms.NumberInput(attrs={'placeholder': 'e.g. 5', 'class':'form-ctontrol'}),
+            'game_sku': forms.TextInput(attrs={'placeholder': 'e.g. G0001', 'class':'form-control'}),
+            'game_title': forms.TextInput(attrs={'placeholder': 'e.g. Diablo IV', 'class':'form-control'}),
+            'game_genre': forms.TextInput(attrs={'placeholder': 'e.g. aRPG', 'class':'form-control'}),
+            'game_platform': forms.TextInput(attrs={'placeholder': 'e.g. PC', 'class':'form-control'}),
+            'game_price': forms.NumberInput(attrs={'placeholder': 'e.g. 15.99', 'class':'form-control'}),
+            'game_quantity': forms.NumberInput(attrs={'placeholder': 'e.g. 5', 'class':'form-control'}),
         }
