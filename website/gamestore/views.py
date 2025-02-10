@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Games
 from .forms import ContactForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, user_passes_test
 # For class-based views[CBV]
 from django.contrib.auth.mixins import LoginRequiredMixin
 # For class-based views[CBV]
@@ -19,7 +19,11 @@ def home(request):
     all_games = Games.objects.all()
     return render(request, 'index.html', {'games': all_games})
 
+def product(request):
+    return render(request, 'product.html')
 
+def checkout(request):
+    return render(request, 'checkout.html')
 
 def contact_view(request):
     if request.method == "POST":
@@ -101,15 +105,19 @@ class ProtectedView(LoginRequiredMixin, View):
     
 
 
-# CRUD
+# Function to check if user is admin or moderator
+def is_admin_or_mod(user):
+    return user.is_authenticated and (user.is_staff or user.is_superuser)
 
 # Index view
 @login_required(login_url='/login/')
+@user_passes_test(is_admin_or_mod)
 def game_index_view(request):
     return render(request, 'crud/index.html')
 
 # Create View
 @login_required(login_url='/login/')
+@user_passes_test(is_admin_or_mod)
 def game_create_view(request):
     form = GamesForm()
     if request.method == 'POST':
@@ -117,19 +125,18 @@ def game_create_view(request):
         if form.is_valid():
             form.save()
             return redirect('game_list')
-    return render(request, 'crud/game_form.html', {'form':form})
-
+    return render(request, 'crud/game_form.html', {'form': form})
 
 # Read View
 @login_required(login_url='/login/')
+@user_passes_test(is_admin_or_mod)
 def game_list_view(request):
     games = Games.objects.all()
-    return render(request, 'crud/game_list.html', {'games':games})
-
-
+    return render(request, 'crud/game_list.html', {'games': games})
 
 # Update View
 @login_required(login_url='/login/')
+@user_passes_test(is_admin_or_mod)
 def game_update_view(request, game_id):
     game = Games.objects.get(game_id=game_id)
     form = GamesForm(instance=game)
@@ -138,12 +145,11 @@ def game_update_view(request, game_id):
         if form.is_valid():
             form.save()
             return redirect('game_list')
-    return render(request, 'crud/game_form.html', {'form':form})
-
-
+    return render(request, 'crud/game_form.html', {'form': form})
 
 # Delete View
 @login_required(login_url='/login/')
+@user_passes_test(is_admin_or_mod)
 def game_delete_view(request, game_id):
     game = Games.objects.get(game_id=game_id)
     if request.method == "POST":

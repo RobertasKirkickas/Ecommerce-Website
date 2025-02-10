@@ -33,7 +33,7 @@ class RegisterForm(forms.ModelForm):
 class GamesForm(forms.ModelForm):
     class Meta:
         model = Games
-        fields = ['game_sku', 'game_title', 'game_genre', 'game_platform', 'game_price', 'game_quantity']
+        fields = ['game_sku', 'game_title', 'game_genre', 'game_platform', 'game_price', 'game_quantity', 'game_discount_price']
         labels = {
             'game_sku': 'SKU',
             'game_title': 'Title',
@@ -41,6 +41,7 @@ class GamesForm(forms.ModelForm):
             'game_platform': 'Platform',
             'game_price': 'Price',
             'game_quantity': 'Quantity',
+            'game_discount_price': 'Discount Price'
         }
         widgets = {
             'game_sku': forms.TextInput(attrs={'placeholder': 'e.g. G0001', 'class':'form-control'}),
@@ -49,4 +50,5 @@ class GamesForm(forms.ModelForm):
             'game_platform': forms.TextInput(attrs={'placeholder': 'e.g. PC', 'class':'form-control'}),
             'game_price': forms.NumberInput(attrs={'placeholder': 'e.g. 15.99', 'class':'form-control'}),
             'game_quantity': forms.NumberInput(attrs={'placeholder': 'e.g. 5', 'class':'form-control'}),
+            'game_discount_price': forms.NumberInput(attrs={'placeholder': 'e.g. 9.99', 'class':'form-control'}),
         }
