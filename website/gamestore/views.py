@@ -12,7 +12,9 @@ from django.contrib.auth.models import User
 # Import the RegisterForm from forms.py
 from .forms import RegisterForm
 from .forms import GamesForm
-# from .serialisers import gamesSerializers
+from .serialisers import gamesSerializers
+from django.views.decorators.http import require_http_methods
+from rest_framework import generics
 
 # Normal pages
 def home(request):
@@ -156,3 +158,6 @@ def game_delete_view(request, game_id):
         game.delete()
         return redirect('game_list')
     return render(request, 'crud/game_confirm_delete.html', {'game': game})
+
+
+
