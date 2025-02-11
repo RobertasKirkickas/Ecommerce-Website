@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'gamestore.apps.GamestoreConfig',
     'crispy_forms',
     'crispy_bootstrap5',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

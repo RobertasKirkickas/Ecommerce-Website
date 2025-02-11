@@ -14,7 +14,9 @@ from .forms import RegisterForm
 from .forms import GamesForm
 from .serialisers import gamesSerializers
 from django.views.decorators.http import require_http_methods
-from rest_framework import generics
+from rest_framework import generics, status
+from rest_framework.response import Response
+
 
 # Normal pages
 def home(request):
@@ -161,3 +163,22 @@ def game_delete_view(request, game_id):
 
 
 
+# API for Listing and Creating Games
+class gamesListCreate(generics.ListCreateAPIView):
+    queryset = Games.objects.all()
+    serializer_class = gamesSerializers
+
+    def create(self, request, *args, **kwargs):
+        # Check if the request contains multiple objects
+        many = isinstance(request.data, list)
+        serializer = self.get_serializer(data=request.data, many=many)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+# API for Retrieving, Updating, and Deleting a Game
+class gamesRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Games.objects.all()
+    serializer_class = gamesSerializers
+    lookup_field = 'pk'  # Deleting using the primary key

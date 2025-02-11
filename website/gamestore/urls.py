@@ -16,4 +16,6 @@ urlpatterns = [
     path('update/<int:game_id>/', views.game_update_view, name="game_update"),
     path('delete/<int:game_id>/', views.game_delete_view, name="game_delete"),
     path('ims/', views.game_index_view, name="ims"),
+    path('gamesapi/', views.gamesListCreate.as_view(), name="gamesapi_view_create"),
+    path('gamesapi/<int:pk>', views.gamesRetrieveUpdateDestroy.as_view(), name="gamesapi_view_update")
 ]
