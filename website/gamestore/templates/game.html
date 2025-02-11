@@ -1,0 +1,13 @@
+{% extends 'layouts/main_layout.html' %}
+
+{% block content %}
+    <div class="container">
+        <h1>{{ game.game_title }}</h1>
+        <img src="{{ game.image_url.url }}" alt="{{ game.game_title }}" class="img-fluid">
+        <p>Genre: {{ game.game_genre }}</p>
+        <p>Platform: {{ game.game_platform }}</p>
+        <p>Price: £{{ game.game_price }}</p>
+        <p>Description: {{ game.game_description }}</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+{% endblock %}

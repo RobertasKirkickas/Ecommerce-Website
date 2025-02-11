@@ -4,16 +4,29 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+CATEGORIES_choices = [
+    ('RPG', 'RPG'),
+    ('Fighting', 'Fighting'),
+    ('Shooter', 'Shooter'),
+    ('Action', 'Action'),
+    ('Racing', 'Racing'),
+    ('Adventure', 'Adventure'),
+    ('Sports', 'Sports')
+]
+
+
+
 class Games(models.Model):
     game_id = models.AutoField(primary_key=True)
-    game_sku = models.CharField(max_length=50, unique=True)
     game_title = models.CharField(max_length=64)
     game_genre = models.CharField(max_length=64)
+    game_category = models.CharField(choices=CATEGORIES_choices, max_length=10)
     game_platform = models.CharField(max_length=64)
     game_price = models.DecimalField(max_digits=7, decimal_places=2)  
     game_quantity = models.IntegerField()
-    game_discount_price = models.IntegerField(blank=True, null=True)
-    image_url = models.CharField(max_length=255, default="images/game-images/default.jpg")
+    game_discount_price = models.DecimalField(max_digits=7, decimal_places=2)  
+    game_description = models.TextField()
+    image_url = models.ImageField(upload_to='game-images/', default="game-images/default.jpg")
 
     def __str__(self):
         return self.game_title

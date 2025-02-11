@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 
+
 urlpatterns = [
     path('', views.home, name='home'),
     path('contact/', views.contact_view, name='contact'),
@@ -17,5 +18,7 @@ urlpatterns = [
     path('delete/<int:game_id>/', views.game_delete_view, name="game_delete"),
     path('ims/', views.game_index_view, name="ims"),
     path('gamesapi/', views.gamesListCreate.as_view(), name="gamesapi_view_create"),
-    path('gamesapi/<int:pk>', views.gamesRetrieveUpdateDestroy.as_view(), name="gamesapi_view_update")
+    path('gamesapi/<int:pk>', views.gamesRetrieveUpdateDestroy.as_view(), name="gamesapi_view_update"),
+    path('game/<int:pk>/', views.game_detail, name='game'),
 ]
+

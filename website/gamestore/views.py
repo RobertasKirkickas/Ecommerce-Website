@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Games
 from .forms import ContactForm
 from django.contrib.auth import authenticate, login, logout
@@ -45,6 +45,9 @@ def contact_success_view(request):
 def checkout(request):
     return render(request, 'checkout.html')
 
+def game_detail(request, pk):
+    game = get_object_or_404(Games, pk=pk)
+    return render(request, 'game.html', {'game': game})
 
 # Authentication
 def register_view(request):
