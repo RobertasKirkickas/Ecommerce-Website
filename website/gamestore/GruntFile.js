@@ -48,7 +48,7 @@ module.exports = function (grunt) {
                 files: {
                     [`${pathToStatic}/js/scripts-vendor.min.js`]: [
                         './node_modules/bootstrap/dist/js/bootstrap.min.js',
-                        './node_modules/lightgallery/lightgallery.min.js',
+                        './node_modules/@popperjs/core/dist/umd/popper.min.js',
                     ],
                 },
             },

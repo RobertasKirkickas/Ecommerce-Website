@@ -1,0 +1,58 @@
+
+[
+    {
+        "game_id": 1,
+        "game_title": "The Witcher 3: Wild Hunt",
+        "game_genre": "RPG / Open World",
+        "game_category": "RPG",
+        "game_platform": "PC / PS5 / Xbox",
+        "game_price": 29.99,
+        "game_quantity": 10,
+        "game_discount_price": 19,
+        "game_description": "An open-world RPG with rich storytelling, immersive gameplay, and a vast fantasy world to explore."
+    },
+    {
+        "game_id": 2,
+        "game_title": "Elden Ring",
+        "game_genre": "Action RPG",
+        "game_category": "RPG",
+        "game_platform": "PC / PS5 / Xbox",
+        "game_price": 59.99,
+        "game_quantity": 15,
+        "game_discount_price": 22,
+        "game_description": "A challenging action RPG set in a dark fantasy world, featuring vast open-world exploration and intense combat."
+    },
+    {
+        "game_id": 3,
+        "game_title": "FIFA 24",
+        "game_genre": "Sports / Football",
+        "game_category": "Sports",
+        "game_platform": "PC / PS5 / Xbox / Switch",
+        "game_price": 49.99,
+        "game_quantity": 20,
+        "game_discount_price": 39,
+        "game_description": "The latest installment in the FIFA series, offering realistic football gameplay and an extensive career mode."
+    },
+    {
+        "game_id": 4,
+        "game_title": "Call of Duty: Modern Warfare II",
+        "game_genre": "Shooter / FPS",
+        "game_category": "Shooter",
+        "game_platform": "PC / PS5 / Xbox",
+        "game_price": 69.99,
+        "game_quantity": 30,
+        "game_discount_price": 49,
+        "game_description": "A high-octane first-person shooter with an intense single-player campaign and action-packed multiplayer modes."
+    },
+    {
+        "game_id": 5,
+        "game_title": "Forza Horizon 5",
+        "game_genre": "Racing / Open World",
+        "game_category": "Racing",
+        "game_platform": "PC / Xbox",
+        "game_price": 39.99,
+        "game_quantity": 25,
+        "game_discount_price": 29,
+        "game_description": "A breathtaking open-world racing game featuring stunning landscapes and high-speed racing challenges."
+    }
+]

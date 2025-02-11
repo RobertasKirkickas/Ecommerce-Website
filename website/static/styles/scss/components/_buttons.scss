@@ -1,9 +1,7 @@
-.btn.btn {
-    background-color: $secondary-color;
-}
+
 
 .btn-r {
-    background-color: #393e4f53;
+    background-color: $secondary-color;
     color: $primary-color;
 
 
@@ -14,11 +12,20 @@
 }
 
 .btn-l {
-    background-color: #393e4f53;
+    background-color: $secondary-color;
     color: $primary-color;
 
     &:hover {
         border-color: rgb(209, 0, 0);
         color: rgb(209, 0, 0);
     }
+}
+
+.btn-outline-dark {
+    border-color: $secondary-text-color;
+
+}
+
+button.navbar-toggler {
+    background-color: $mobile-nav-trigger-bg;
 }

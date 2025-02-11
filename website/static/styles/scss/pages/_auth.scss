@@ -30,22 +30,15 @@ body#auth-page {
             font-weight: bold;
         }
 
-
-
-
         button {
             margin: 5px;
-            background-color: $bg-color;
-            color: $primary-color;
-
             padding: 10px 20px;
             cursor: pointer;
             border-radius: 4px;
         }
 
-        button:hover {
-            background-color: $secondary-color;
-            color: $bg-color;
+        a:hover {
+            color: $secondary-color;
         }
     }
 
@@ -56,16 +49,3 @@ body#auth-page {
     }
 }
 
-/* logout button style */
-
-.btn.btn-logout {
-    border: none;
-    background-color: $secondary-color;
-    color: $secondary-text-color;
-
-    &:hover,
-    &:active {
-
-        color: $secondary-text-color;
-    }
-}

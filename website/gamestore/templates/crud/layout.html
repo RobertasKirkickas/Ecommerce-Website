@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>
       {% block title %}
-        Game Store
+        Game Arena
       {% endblock %}
     </title>
     <link href="
     https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/css/bootstrap.min.css
-    " rel="stylesheet" /> 
+    " rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
 
     <script src="{% static 'js/scripts-vendor.min.js' %}"></script>
@@ -31,15 +31,6 @@
   <body id="crud-page" class="d-flex flex-column min-vh-100">
     <header class="nav-header">
       <nav class="navbar navbar-expand-lg mb-4">
-        {% if user.is_authenticated %}
-          <p>Welcome, {{ request.user.username }}</p>
-        {% endif %}
-        {% if user.is_authenticated %}
-          <form action="{% url 'logout' %}" method="POST">
-            {% csrf_token %}
-            <button class="btn btn-logout" type="submit">Logout</button>
-          </form>
-        {% endif %}
         <div class="container">
           <img src="{% static 'images/logo.png' %}" alt="logo" />
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -53,7 +44,7 @@
                 <a class="nav-link" href="/contact">Contact</a>
               </li>
 
-              {% if user.is_authenticated %}
+              {% if user.is_authenticated and user.is_staff %}
                 {% csrf_token %}
 
                 <li class="nav-item">
@@ -66,11 +57,33 @@
                 <a class="nav-link" href="{% url 'login' %}">Login</a>
               {% endif %}
             </ul>
-            <form action="search.html" method="get" class="d-flex" role="search">
+            <form action="search.html" method="get" class="d-flex search-bar" role="search">
               <input class="form-control me-2" type="search" placeholder="Search..." aria- label="Search" />
               <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
           </div>
+ <!-- Right elements -->
+ <div class="d-flex align-items-center right-nav">
+  {% if user.is_authenticated %}
+  <!-- User Avatar Dropdown -->
+  <div class="dropdown">
+    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      {{ request.user.username }}
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+      <li><a class="dropdown-item" href="#">My Profile</a></li>
+      <li><a class="dropdown-item" href="#">Settings</a></li>
+      <li>
+        <form action="{% url 'logout' %}" method="POST" class="dropdown-item">
+          {% csrf_token %}
+          <button type="submit" class="dropdown-item bg-transparent border-0 text-decoration-none p-0">LOGOUT</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+  {% endif %}
+</div>
+<!-- Right elements -->
         </div>
       </nav>
     </header>
@@ -113,9 +126,7 @@
       </div>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-   <script src="
-https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js
-"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

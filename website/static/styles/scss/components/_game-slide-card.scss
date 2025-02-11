@@ -1,25 +1,52 @@
-.game-slide-card .game-slide-card-img {
-    height: 200px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-
 .game-slide-card {
-    margin: 10px;
-    background-color: #FFF;
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
-    padding: 12px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
     text-align: center;
-    border: solid 1px #eaeaea;
-    border-radius: 3px;
+    transition: transform 0.3s ease-in-out;
+    height: 100%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.game-slide-card h3 {
-    font-size: 1.1rem;
-    padding-top: 10px;
-    color: $primary-color;
+/* Game Image */
+.game-slide-card-img img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Game Card Content */
+.game-slide-card-body {
+    padding: 15px;
+}
+
+/* Prevent title overflow */
+.text-truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Glide Arrows Styling */
+.glide__arrow {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 50%;
+    font-size: 20px;
+    transition: 0.3s;
+}
+
+.glide__arrow:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Link color inside carousel */
+.glide {
+    a {
+        color: $primary-color;
+    }
 }

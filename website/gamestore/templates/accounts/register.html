@@ -1,62 +1,10 @@
-{% load static %}
+{% extends 'layouts/main_layout.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Game Store</title>
+{% block title %}Game Arena{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'styles/styles.css' %}" />
+{% block body_id %}auth-page{% endblock %}
 
-    <script src="{% static 'js/scripts-vendor.min.js' %}"></script>
-    <script src="{% static 'js/scripts.min.js' %}"></script>
-
-    <script src="https://kit.fontawesome.com/742d26d11b.js" crossorigin="anonymous"></script>
-  </head>
-
-  <body id="auth-page">
-    <header>
-      <nav class="navbar navbar-expand-lg mb-4">
-        {% if user.is_authenticated %}
-          <p>Welcome, {{ request.user.username }}</p>
-        {% endif %}
-        {% if user.is_authenticated %}
-          <form action="{% url 'logout' %}" method="POST">
-            {% csrf_token %}
-            <button class="btn btn-logout" type="submit">Logout</button>
-          </form>
-        {% endif %}
-        <div class="container">
-          <img src="{% static 'images/logo.png' %}" alt="logo" />
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-
-          <div class="collapse navbar-collapse" id="navbar">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="/">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/contact">Contact</a>
-              </li>
-              <li class="nav-item">
-                {% if user.is_authenticated %}
-                  {% csrf_token %}
-                {% else %}
-                  <a class="nav-link" href="{% url 'login' %}">Login</a>
-                {% endif %}
-              </li>
-            </ul>
-            <form action="search.html" method="get" class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search..." aria- label="Search" />
-              <button class="btn btn-outline-dark" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <div class="container">
+{% block content %}
       <h2>Register</h2>
 
       <form class="auth-form" method="POST" action="{% url 'register' %}">
@@ -64,38 +12,5 @@
         {{ form.as_p }}
         <button class="btn btn-outline-dark" type="submit">Register</button>
       </form>
-    </div>
 
-    <footer class="site-footer">
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <img src="{% static 'images/logo.png' %}" alt="Game Arena" class="footer-logo" />
-            <p>Find Your Favourite Games!</p>
-          </div>
-          <div class="footer-section">
-            <h3>Links</h3>
-            <ul>
-              <li>
-                <a href="index.html">Home</a>
-              </li>
-              <li>
-                <a href="contact.html">Contact</a>
-              </li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h3>Socials</h3>
-            <div class="social-links">
-              <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-              <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>&copy; 2025 Game Arena</p>
-        </div>
-      </div>
-    </footer>
-  </body>
-</html>
+      {% endblock  %}
