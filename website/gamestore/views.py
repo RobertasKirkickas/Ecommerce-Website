@@ -85,6 +85,7 @@ def login_view(request):
     return render(request, 'accounts/login.html', {'error': error_message})
 
 
+
 def logout_view(request):
     if request.method == "POST":
         logout(request)
@@ -145,10 +146,11 @@ def game_list_view(request):
 @login_required(login_url='/login/')
 @user_passes_test(is_admin_or_mod)
 def game_update_view(request, game_id):
-    game = Games.objects.get(game_id=game_id)
+    # Get the specific game object using the primary key (game_id)
+    game = get_object_or_404(Games, pk=game_id)
     form = GamesForm(instance=game)
     if request.method == "POST":
-        form = GamesForm(request.POST, instance=game)
+        form = GamesForm(request.POST, request.FILES, instance=game)
         if form.is_valid():
             form.save()
             return redirect('game_list')
@@ -185,3 +187,4 @@ class gamesRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Games.objects.all()
     serializer_class = gamesSerializers
     lookup_field = 'pk'  # Deleting using the primary key
+

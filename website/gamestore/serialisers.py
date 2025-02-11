@@ -4,7 +4,7 @@ from .models import Games
 class gamesSerializers(serializers.ModelSerializer):
     class Meta:
         model=Games
-        fields=['game_title', 'game_genre', 'game_category', 'game_platform', 'game_price', 'game_quantity', 'game_discount_price', 'game_description']
+        fields=['game_title', 'game_genre', 'game_category', 'game_platform', 'game_price', 'game_quantity', 'game_discount_price', 'image_url', 'game_description']
 
 
 def create(self, validated_data):

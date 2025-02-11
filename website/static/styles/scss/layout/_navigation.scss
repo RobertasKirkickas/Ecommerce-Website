@@ -22,15 +22,6 @@ header {
     }
 }
 
-button.btn.btn-outline-dark {
-    border-color: $secondary-text-color;
-    color: $secondary-text-color
-}
-
-button.navbar-toggler {
-    background-color: $mobile-nav-trigger-bg;
-}
-
 @media screen and (max-width: 768px) {
     .right-nav {
         display: flex;

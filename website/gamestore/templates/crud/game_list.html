@@ -15,12 +15,13 @@
           <thead class="thead-dark">
             <tr>
               <th>Game ID</th>
-              <th>SKU</th>
               <th>Title</th>
               <th>Genre</th>
+              <th>Category</th>
               <th>Platform</th>
               <th>Price</th>
               <th>Quantity</th>
+              <th>Discount Price</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -28,15 +29,16 @@
             {% for game in games %}
               <tr>
                 <td>{{ game.game_id }}</td>
-                <td>{{ game.game_sku }}</td>
                 <td>{{ game.game_title }}</td>
                 <td>{{ game.game_genre }}</td>
+                <td>{{ game.game_category }}</td>
                 <td>{{ game.game_platform }}</td>
                 <td>£{{ game.game_price }}</td>
                 <td>{{ game.game_quantity }}</td>
+                <td>{{ game.game_discount_price }}</td>
                 <td>
-                  <a href="{% url 'game_update' game.game_id %}" class="btn btn-upd">Update</a>
-                  <a href="{% url 'game_delete' game.game_id %}" class="btn btn-del">Delete</a>
+                  <a href="{% url 'game_update' game.game_id %}" class="btn btn-outline-dark btn-upd">Update</a>
+                  <a href="{% url 'game_delete' game.game_id %}" class="btn btn-outline-dark btn-del">Delete</a>
                 </td>
               </tr>
             {% endfor %}
@@ -55,8 +57,8 @@
             <p class="card-text"><strong>Platform:</strong> {{ game.game_platform }}</p>
             <p class="card-text"><strong>Price:</strong> £{{ game.game_price }}</p>
             <p class="card-text"><strong>Quantity:</strong> {{ game.game_quantity }}</p>
-            <a href="{% url 'game_update' game.game_id %}" class="btn btn-upd">Update</a>
-            <a href="{% url 'game_delete' game.game_id %}" class="btn btn-del">Delete</a>
+            <a href="{% url 'game_update' game.game_id %}" class="btn btn-outline-dark btn-upd">Update</a>
+            <a href="{% url 'game_delete' game.game_id %}" class="btn btn-outline-dark btn-del">Delete</a>
           </div>
         </div>
       {% endfor %}

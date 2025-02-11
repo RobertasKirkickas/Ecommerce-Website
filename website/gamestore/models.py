@@ -26,7 +26,8 @@ class Games(models.Model):
     game_quantity = models.IntegerField()
     game_discount_price = models.DecimalField(max_digits=7, decimal_places=2)  
     game_description = models.TextField()
-    image_url = models.ImageField(upload_to='game-images/', default="game-images/default.jpg")
+    image_url = models.ImageField(upload_to='game-images/', default="game-images/default.png")
+    
 
     def __str__(self):
         return self.game_title
