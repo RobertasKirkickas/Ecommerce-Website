@@ -16,6 +16,7 @@ from .serialisers import gamesSerializers
 from django.views.decorators.http import require_http_methods
 from rest_framework import generics, status
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from django.utils import timezone
@@ -62,6 +63,25 @@ def add_to_cart(request, slug):
         order.save()
         return redirect('game', slug=slug)
     
+def remove_from_cart(request, slug):
+    item = get_object_or_404(Games, slug=slug)
+    order_item, created = OrderItem.objects.get_or_create(
+        item=item, user=request.user, ordered=False)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.items.filter(item__slug=item.slug).exists():
+            order.items.remove(order_item)
+            order.save()
+            messages.success(request, f"{item.game_title} was removed from your cart!")
+            return redirect('game', slug=slug)
+        else:
+            messages.info(request, f"{item.game_title} was not in your cart!")
+            return redirect('game', slug=slug)
+    else:
+        messages.info(request, "You don't have an active order!")
+        return redirect('game', slug=slug)
+
 
 def contact_view(request):
     if request.method == "POST":
@@ -199,6 +219,7 @@ def game_delete_view(request, game_id):
 
 # API for Listing and Creating Games
 class gamesListCreate(generics.ListCreateAPIView):
+    permission_classes = (AllowAny,)
     queryset = Games.objects.all()
     serializer_class = gamesSerializers
 

@@ -4,7 +4,8 @@ from .views import (
     HomeView,
     checkout,
     GameDetail,
-    add_to_cart
+    add_to_cart,
+    remove_from_cart
 )
 
 urlpatterns = [
@@ -25,6 +26,7 @@ urlpatterns = [
     path('gamesapi/<int:pk>', views.gamesRetrieveUpdateDestroy.as_view(), name="gamesapi_view_update"),
     
     path('game/<slug:slug>/', views.GameDetail.as_view(), name='game'),
-    path('add-to-cart/<slug>/', add_to_cart, name='add_to_cart')
+    path('add-to-cart/<slug>/', add_to_cart, name='add_to_cart'),
+    path('remove-from-cart/<slug>/', remove_from_cart, name='remove_from_cart'),
 ]
 

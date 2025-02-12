@@ -47,6 +47,11 @@ class Games(models.Model):
     def get_add_to_cart_url(self):
         return reverse('add_to_cart', kwargs={'slug':self.slug})
 
+    def get_remove_from_cart_url(self):
+        return reverse('add_to_cart', kwargs={'slug':self.slug})
+    
+
+
     # Testing unit
     def get_total_price(self):
         return self.game_price * self.game_quantity
