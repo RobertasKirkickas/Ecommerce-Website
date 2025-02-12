@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Games
+from .models import Games, Order, OrderItem
 from .forms import ContactForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -16,18 +16,52 @@ from .serialisers import gamesSerializers
 from django.views.decorators.http import require_http_methods
 from rest_framework import generics, status
 from rest_framework.response import Response
+from django.views.generic import ListView, DetailView
+from django.contrib import messages
+from django.utils import timezone
 
+class HomeView(ListView):
+    model = Games
+    template_name = "index.html"
+
+class GameDetail(DetailView):
+    model = Games
+    template_name = 'game.html'
+    context_object_name = 'game'
 
 # Normal pages
 def home(request):
     all_games = Games.objects.all()
     return render(request, 'index.html', {'games': all_games})
 
-def product(request):
-    return render(request, 'product.html')
 
 def checkout(request):
     return render(request, 'checkout.html')
+
+# CART
+def add_to_cart(request, slug):
+    item = get_object_or_404(Games, slug=slug)
+    order_item, created = OrderItem.objects.get_or_create(item=item, user=request.user, ordered=False)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.items.filter(item__slug=item.slug).exists():
+            order_item.quantity += 1
+            order_item.save()
+            messages.success(request, f"{item.game_title}'s quantity was updated!")
+            return redirect('game', slug=slug)
+        else:
+            order.items.add(order_item)
+            order.save()
+            messages.success(request, f"{item.game_title} was added to your cart!")
+            return redirect('game', slug=slug)
+    else:
+        ordered_date = timezone.now()
+        order = Order.objects.create(user=request.user, ordered=False, ordered_date=ordered_date)
+        order.items.add(order_item)
+        order.save()
+        return redirect('game', slug=slug)
+    
 
 def contact_view(request):
     if request.method == "POST":
@@ -42,8 +76,6 @@ def contact_view(request):
 def contact_success_view(request):
     return render(request, 'forms/contact_success.html')
 
-def checkout(request):
-    return render(request, 'checkout.html')
 
 def game_detail(request, pk):
     game = get_object_or_404(Games, pk=pk)
@@ -85,15 +117,12 @@ def login_view(request):
     return render(request, 'accounts/login.html', {'error': error_message})
 
 
-
 def logout_view(request):
     if request.method == "POST":
         logout(request)
         return redirect('login')
     else:
         return redirect('home')
-
-
 
 # Home View
 # Using decorator
