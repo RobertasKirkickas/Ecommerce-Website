@@ -57,7 +57,7 @@
           {% if user.is_authenticated %}
           <div class="d-flex align-items-center right-nav">
             <!-- Cart Icon -->
-            <a class="text-reset me-3 position-relative" href="#">
+            <a href="{% url 'order_summary' %}" class="text-reset me-3 position-relative">
               <i class="fas fa-shopping-cart fa-lg"></i>
               <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{ request.user|cart_item_count}}

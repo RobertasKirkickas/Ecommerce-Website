@@ -30,6 +30,11 @@ class GameDetail(DetailView):
     template_name = 'game.html'
     context_object_name = 'game'
 
+class OrderSummaryView(View):
+    def get(self, *args, **kwargs):
+        return render(self.request, 'order_summary.html')
+
+
 # Normal pages
 def home(request):
     all_games = Games.objects.all()
@@ -38,6 +43,7 @@ def home(request):
 
 def checkout(request):
     return render(request, 'checkout.html')
+
 
 # CART
 def add_to_cart(request, slug):
@@ -83,6 +89,8 @@ def remove_from_cart(request, slug):
         return redirect('game', slug=slug)
 
 
+
+# CONTACT
 def contact_view(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
@@ -101,6 +109,8 @@ def game_detail(request, pk):
     game = get_object_or_404(Games, pk=pk)
     return render(request, 'game.html', {'game': game})
 
+
+
 # Authentication
 def register_view(request):
     if request.method == "POST":
@@ -115,8 +125,6 @@ def register_view(request):
         form = RegisterForm()  
 
     return render(request, 'accounts/register.html', {'form': form}) 
-
-
 
 
 def login_view(request):
