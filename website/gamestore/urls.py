@@ -1,11 +1,10 @@
 from django.urls import path
 from . import views
 from .views import (
-
     checkout,
-
     add_to_cart,
     remove_from_cart,
+    remove_single_from_cart,
     OrderSummaryView
 )
 
@@ -30,6 +29,7 @@ urlpatterns = [
     path('game/<slug:slug>/', views.GameDetail.as_view(), name='game'),
     path('add-to-cart/<slug>/', add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<slug>/', remove_from_cart, name='remove_from_cart'),
+    path('remove-single-from-cart/<slug>/', remove_single_from_cart, name='remove_single_from_cart'),
 
 ]
 

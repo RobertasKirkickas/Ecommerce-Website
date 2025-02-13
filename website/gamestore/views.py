@@ -32,7 +32,11 @@ class GameDetail(DetailView):
 
 class OrderSummaryView(View):
     def get(self, *args, **kwargs):
-        return render(self.request, 'order_summary.html')
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        context = {
+            'order':order
+        }
+        return render(self.request, 'order_summary.html', context)
 
 
 # Normal pages
@@ -56,18 +60,18 @@ def add_to_cart(request, slug):
             order_item.quantity += 1
             order_item.save()
             messages.success(request, f"{item.game_title}'s quantity was updated!")
-            return redirect('game', slug=slug)
+            return redirect('order_summary')
         else:
             order.items.add(order_item)
             order.save()
             messages.success(request, f"{item.game_title} was added to your cart!")
-            return redirect('game', slug=slug)
+            return redirect('order_summary')
     else:
         ordered_date = timezone.now()
         order = Order.objects.create(user=request.user, ordered=False, ordered_date=ordered_date)
         order.items.add(order_item)
         order.save()
-        return redirect('game', slug=slug)
+        return redirect('order_summary')
     
 def remove_from_cart(request, slug):
     item = get_object_or_404(Games, slug=slug)
@@ -80,15 +84,37 @@ def remove_from_cart(request, slug):
             order.items.remove(order_item)
             order.save()
             messages.success(request, f"{item.game_title} was removed from your cart!")
-            return redirect('game', slug=slug)
+            return redirect('order_summary')
         else:
             messages.info(request, f"{item.game_title} was not in your cart!")
-            return redirect('game', slug=slug)
+            return redirect('order_summary')
     else:
         messages.info(request, "You don't have an active order!")
-        return redirect('game', slug=slug)
+        return redirect('order_summary')
 
+def remove_single_from_cart(request, slug):
+    item = get_object_or_404(Games, slug=slug)
+    order_item, created = OrderItem.objects.get_or_create(
+        item=item, user=request.user, ordered=False)
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    if order_qs.exists():
+        order = order_qs[0]
+        if order.items.filter(item__slug=item.slug).exists():
+            if order_item.quantity > 1:
+                order_item.quantity -= 1
+                order_item.save()
+            else:
+                order.items.remove(order_item)
+                order.save()
 
+            messages.success(request, f"{item.game_title}'s quantity was updated!")
+            return redirect('order_summary')
+        else:
+            messages.info(request, f"{item.game_title} was not in your cart!")
+            return redirect('order_summary')
+    else:
+        messages.info(request, "You don't have an active order!")
+        return redirect('order_summary')
 
 # CONTACT
 def contact_view(request):
