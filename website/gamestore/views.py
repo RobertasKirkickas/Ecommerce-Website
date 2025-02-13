@@ -50,28 +50,38 @@ def checkout(request):
 
 
 # CART
+@login_required
 def add_to_cart(request, slug):
     item = get_object_or_404(Games, slug=slug)
-    order_item, created = OrderItem.objects.get_or_create(item=item, user=request.user, ordered=False)
-    order_qs = Order.objects.filter(user=request.user, ordered=False)
-    if order_qs.exists():
-        order = order_qs[0]
-        if order.items.filter(item__slug=item.slug).exists():
-            order_item.quantity += 1
-            order_item.save()
-            messages.success(request, f"{item.game_title}'s quantity was updated!")
-            return redirect('order_summary')
+
+    # Ensure user is authenticated before proceeding
+    if request.user.is_authenticated:
+        order_item, created = OrderItem.objects.get_or_create(item=item, user=request.user, ordered=False)
+        order_qs = Order.objects.filter(user=request.user, ordered=False)
+
+        if order_qs.exists():
+            order = order_qs[0]
+
+            if order.items.filter(item__slug=item.slug).exists():
+                order_item.quantity += 1
+                order_item.save()
+                messages.success(request, f"{item.game_title}'s quantity was updated!")
+            else:
+                order.items.add(order_item)
+                order.save()
+                messages.success(request, f"{item.game_title} was added to your cart!")
+
         else:
+            ordered_date = timezone.now()
+            order = Order.objects.create(user=request.user, ordered=False, ordered_date=ordered_date)
             order.items.add(order_item)
             order.save()
-            messages.success(request, f"{item.game_title} was added to your cart!")
-            return redirect('order_summary')
-    else:
-        ordered_date = timezone.now()
-        order = Order.objects.create(user=request.user, ordered=False, ordered_date=ordered_date)
-        order.items.add(order_item)
-        order.save()
+
         return redirect('order_summary')
+
+    else:
+        messages.warning(request, "You need to log in to add items to your cart.")
+        return redirect('login')  # Redirect to login page if user is not authenticated
     
 def remove_from_cart(request, slug):
     item = get_object_or_404(Games, slug=slug)
