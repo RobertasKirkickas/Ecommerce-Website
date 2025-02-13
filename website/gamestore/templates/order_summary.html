@@ -3,6 +3,7 @@
 {% block content %}
 
 <div class="container">
+    {% if order.items.all %}
     <section class="mb-4">
     <h2>Order Summary</h2>
     <div class="table-responsive">
@@ -72,13 +73,17 @@
 
                 <tr>
                     <td colspan="5" class="text-end">
-                        <a href="" class="btn btn-outline-warning">Proceed to Checkout</a>
+                        <a href="{% url 'checkout' %}" class="btn btn-outline-warning">Proceed to Checkout</a>
                         <a href="{% url 'home' %}" class="btn btn-outline-primary">Continue Shopping</a>
                     </td>
                 </tr>
                 {% endif %}
               </tbody>
         </table>
+        {% else %}
+        <h4 class="mt-5 pt-4">No items in your cart</h4>
+        <a href="{% url 'home' %}" class="btn btn-outline-primary">Continue Shopping</a>
+        {% endif %}
       </div>
     </section>
 </div>

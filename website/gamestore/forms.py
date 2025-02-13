@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from .models import Games
 
+# Contact
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
     email = forms.EmailField()
@@ -10,6 +11,8 @@ class ContactForm(forms.Form):
     def send_email(self):
         print(f"Sending email from {self.cleaned_data['email']} with message: {self.cleaned_data['message']}")
 
+
+# AUTH
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     password_confirm = forms.CharField(widget=forms.PasswordInput, label='Confirm Password')
@@ -28,6 +31,8 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError("Passwords do not match!")
         return cleaned_data
 
+
+# Form for editing / adding games to the system.
 class GamesForm(forms.ModelForm):
     class Meta:
         model = Games
@@ -56,3 +61,23 @@ class GamesForm(forms.ModelForm):
             'image_url': forms.ClearableFileInput(attrs={'class':'form-control'}),
             'game_description': forms.Textarea(attrs={'class':'form-control'})
         }
+
+
+# Checkout form
+PAYMENT_CHOICES = (
+    ('S', 'Stripe'),
+    ('P', 'Paypal'),
+)
+
+class AddressForm(forms.Form):
+    first_name = forms.CharField(max_length=100)
+    last_name = forms.CharField(max_length=100)
+    email = forms.EmailField()
+    street_address = forms.CharField()
+    apartment_address = forms.CharField()
+    city = forms.CharField()
+    post_code = forms.CharField()
+    save_info = forms.BooleanField(required=False)
+    default = forms.BooleanField(required=False)
+    use_default = forms.BooleanField(required=False)
+    payment_option = forms.ChoiceField(widget=forms.RadioSelect(), choices=PAYMENT_CHOICES)  

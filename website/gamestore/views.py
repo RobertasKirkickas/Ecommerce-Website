@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Games, Order, OrderItem
-from .forms import ContactForm
+from .forms import ContactForm, AddressForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 # For class-based views[CBV]
@@ -20,6 +20,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from django.utils import timezone
+
 
 class HomeView(ListView):
     model = Games
@@ -44,10 +45,16 @@ def home(request):
     all_games = Games.objects.all()
     return render(request, 'index.html', {'games': all_games})
 
-
-def checkout(request):
-    return render(request, 'checkout.html')
-
+class CheckoutView(View):
+    def get(self, *args, **kwargs):
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        form = AddressForm()
+        context = {
+            'form':form,
+            'order':order
+        }
+        return render(self.request, 'checkout.html', context)
+        
 
 # CART
 @login_required
