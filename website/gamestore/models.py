@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.utils.text import slugify
+from django.core.validators import RegexValidator
 # Create your models here.
 
 CATEGORIES_choices = [
@@ -113,9 +114,9 @@ class Address(models.Model):
     last_name = models.CharField(max_length=20)
     email = models.EmailField()
     street_address = models.CharField(max_length=200)
-    apartment_address = models.CharField(max_length=200)
+    apartment_address = models.CharField(max_length=200, blank=True, null=True)
     city = models.CharField(max_length=20)
-    post_code = models.CharField(max_length=7)
+    post_code = models.CharField(max_length=10)
     save_info = models.BooleanField(default=False)
     default = models.BooleanField(default=False)
     use_default = models.BooleanField(default=False)
@@ -123,3 +124,9 @@ class Address(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    # Ensure only one default address per user
+    def save(self, *args, **kwargs):
+        if self.default:
+            Address.objects.filter(user=self.user, default=True).exclude(id=self.id).update(default=False)
+        super().save(*args, **kwargs)

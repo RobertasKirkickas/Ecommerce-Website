@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Games, Order, OrderItem
+from .models import Games, Order, OrderItem, Address
 from .forms import ContactForm, AddressForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -54,6 +54,70 @@ class CheckoutView(View):
             'order':order
         }
         return render(self.request, 'checkout.html', context)
+        
+    def post(self, *args, **kwargs):
+        order = Order.objects.get(user=self.request.user, ordered=False)
+        form = AddressForm(self.request.POST or None)
+        if form.is_valid():
+        # Collect the form data
+            first_name = form.cleaned_data.get('first_name')
+            last_name = form.cleaned_data.get('last_name')
+            email = form.cleaned_data.get('email')
+            street_address = form.cleaned_data.get('street_address')
+            apartment_address = form.cleaned_data.get('apartment_address')
+            city = form.cleaned_data.get('city')
+            post_code = form.cleaned_data.get('post_code')
+            save_info = form.cleaned_data.get('save_info')
+            use_default = form.cleaned_data.get('use_default')
+            payment_option = form.cleaned_data.get('payment_option')
+
+        # Create new address
+            address = Address(
+                user=self.request.user,
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                street_address=street_address,
+                apartment_address=apartment_address,
+                city=city,
+                post_code=post_code,
+                save_info=save_info,
+                payment_option=payment_option,
+            )
+            address.save()
+
+        # If save_info is true, mark this address as default
+            if save_info:
+                address.default = True
+                address.save()
+
+        # Link the address to the order
+            order.address = address
+            order.save()
+
+        # If user selected use_default, assign the default address to order
+            if use_default:
+                default_address = Address.objects.filter(user=self.request.user, default=True).first()
+                if default_address:
+                    order.address = default_address
+                    order.save()
+
+        # Handle payment option (uncomment these lines as needed)
+        # if payment_option == "S":
+        #     return redirect('payment', payment_option="stripe")
+
+        # if payment_option == "P":
+        #     return redirect('payment', payment_option="paypal")
+
+        # Redirect or show success message
+            messages.success(self.request, "Your address has been saved successfully!")
+            return redirect('checkout')
+
+        else:
+            print('form invalid')
+            messages.error(self.request, "There was an error with your form. Please check your input.")
+            return redirect('checkout')
+
         
 
 # CART

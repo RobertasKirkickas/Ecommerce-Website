@@ -7,8 +7,12 @@ class ItemAdmin(admin.ModelAdmin):
 
 class AddressAdmin(admin.ModelAdmin):
     list_display = [
+        'first_name',
+        'last_name',
+        'email',
         'street_address',
         'apartment_address',
+        'city',
         'post_code',
         'default'
         ] 
