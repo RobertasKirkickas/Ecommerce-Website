@@ -45,6 +45,26 @@ def home(request):
     all_games = Games.objects.all()
     return render(request, 'index.html', {'games': all_games})
 
+# def search(request, slug):
+#     all_games = Games.objects.all()
+#     return render(request, 'components/search.html', {'games': all_games})
+
+class SearchView(ListView):
+    model = Games
+    template_name = 'components/search.html'
+    context_object_name = 'search_games'
+
+    def get_queryset(self):
+        result = super(SearchView, self).get_queryset()
+        query = self.request.GET.get('search')
+        if query:
+            postresult = Games.objects.filter(game_title__contains=query)
+            result = postresult
+        else:
+            result = None
+        return result
+
+# Checkout
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         try:

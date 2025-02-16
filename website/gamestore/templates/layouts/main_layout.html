@@ -49,13 +49,14 @@
                 {% endif %}
               </li>
             </ul>
-            <form action="search.html" method="get" class="d-flex search-bar" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search..." aria-label="Search" />
+            <!-- Right elements -->
+            <form action="{% url 'search' %}" method="GET" class="d-flex search-bar" role="search">
+              <input class="form-control me-2" type="search" name="search" placeholder="Search..." aria-label="Search" />
               <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
           </div>
 
-          <!-- Right elements -->
+
           {% if user.is_authenticated %}
           <div class="d-flex align-items-center right-nav">
             <!-- Cart Icon -->

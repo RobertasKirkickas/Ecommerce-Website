@@ -57,36 +57,38 @@
                 <a class="nav-link" href="{% url 'login' %}">Login</a>
               {% endif %}
             </ul>
-            <form action="search.html" method="get" class="d-flex search-bar" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search..." aria- label="Search" />
+
+             <!-- Right elements -->
+            <form action="{% url 'search' %}" method="GET" class="d-flex search-bar" role="search">
+              <input class="form-control me-2" type="search" name="search" placeholder="Search..." aria-label="Search" />
               <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
           </div>
- <!-- Right elements -->
- <div class="d-flex align-items-center right-nav">
-  {% if user.is_authenticated %}
-  <!-- User Avatar Dropdown -->
-  <div class="dropdown">
-    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-      {{ request.user.username }}
-    </a>
-    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-      <li><a class="dropdown-item" href="#">My Profile</a></li>
-      <li><a class="dropdown-item" href="#">Settings</a></li>
-      <li>
-        <form action="{% url 'logout' %}" method="POST" class="dropdown-item">
-          {% csrf_token %}
-          <button type="submit" class="dropdown-item bg-transparent border-0 text-decoration-none p-0">LOGOUT</button>
-        </form>
-      </li>
-    </ul>
-  </div>
-  {% endif %}
-</div>
-<!-- Right elements -->
-        </div>
-      </nav>
-    </header>
+
+          <div class="d-flex align-items-center right-nav">
+            {% if user.is_authenticated %}
+            <!-- User Avatar Dropdown -->
+            <div class="dropdown">
+              <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                {{ request.user.username }}
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li>
+                  <form action="{% url 'logout' %}" method="POST" class="dropdown-item">
+                    {% csrf_token %}
+                    <button type="submit" class="dropdown-item bg-transparent border-0 text-decoration-none p-0">LOGOUT</button>
+                  </form>
+                </li>
+              </ul>
+            </div>
+            {% endif %}
+          </div>
+        <!-- Right elements -->
+                </div>
+              </nav>
+            </header>
 
     <div class="container">
       {% block content %}

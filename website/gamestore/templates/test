@@ -1,57 +1,112 @@
 [
-    {
-        "game_id": 1,
-        "game_title": "The Witcher 3: Wild Hunt",
-        "game_genre": "RPG / Open World",
-        "game_category": "RPG",
-        "game_platform": "PC / PS5 / Xbox",
-        "game_price": 29.99,
-        "game_quantity": 10,
-        "game_discount_price": 19,
-        "game_description": "An open-world RPG with rich storytelling, immersive gameplay, and a vast fantasy world to explore."
-    },
-    {
-        "game_id": 2,
-        "game_title": "Elden Ring",
-        "game_genre": "Action RPG",
-        "game_category": "RPG",
-        "game_platform": "PC / PS5 / Xbox",
-        "game_price": 59.99,
-        "game_quantity": 15,
-        "game_discount_price": 22,
-        "game_description": "A challenging action RPG set in a dark fantasy world, featuring vast open-world exploration and intense combat."
-    },
-    {
-        "game_id": 3,
-        "game_title": "FIFA 24",
-        "game_genre": "Sports / Football",
-        "game_category": "Sports",
-        "game_platform": "PC / PS5 / Xbox / Switch",
-        "game_price": 49.99,
-        "game_quantity": 20,
-        "game_discount_price": 39,
-        "game_description": "The latest installment in the FIFA series, offering realistic football gameplay and an extensive career mode."
-    },
-    {
-        "game_id": 4,
-        "game_title": "Call of Duty: Modern Warfare II",
-        "game_genre": "Shooter / FPS",
-        "game_category": "Shooter",
-        "game_platform": "PC / PS5 / Xbox",
-        "game_price": 69.99,
-        "game_quantity": 30,
-        "game_discount_price": 49,
-        "game_description": "A high-octane first-person shooter with an intense single-player campaign and action-packed multiplayer modes."
-    },
-    {
-        "game_id": 5,
-        "game_title": "Forza Horizon 5",
-        "game_genre": "Racing / Open World",
-        "game_category": "Racing",
-        "game_platform": "PC / Xbox",
-        "game_price": 39.99,
-        "game_quantity": 25,
-        "game_discount_price": 29,
-        "game_description": "A breathtaking open-world racing game featuring stunning landscapes and high-speed racing challenges."
-    }
+  {
+    "game_id": 1,
+    "game_title": "Grand Theft Auto VI",
+    "game_genre": "Action-Adventure",
+    "game_category": "Action",
+    "game_platform": "PS5, Xbox Series X/S",
+    "game_price": 69.99,
+    "game_quantity": 150,
+    "game_discount_price": 59.99,
+    "game_description": "An open-world game set in the fictional state of Leonida, featuring a dynamic duo of protagonists."
+  },
+  {
+    "game_id": 2,
+    "game_title": "Final Fantasy VII Rebirth",
+    "game_genre": "Role-Playing Game",
+    "game_category": "RPG",
+    "game_platform": "PS5",
+    "game_price": 59.99,
+    "game_quantity": 120,
+    "game_discount_price": 49.99,
+    "game_description": "The highly anticipated sequel in the Final Fantasy VII series, continuing the epic journey of Cloud and his allies."
+  },
+  {
+    "game_id": 3,
+    "game_title": "Monster Hunter Wilds",
+    "game_genre": "Action RPG",
+    "game_category": "RPG",
+    "game_platform": "PS5, Xbox Series X/S, PC",
+    "game_price": 59.99,
+    "game_quantity": 100,
+    "game_discount_price": 54.99,
+    "game_description": "A new installment in the Monster Hunter series, featuring expansive wild terrains and formidable creatures."
+  },
+  {
+    "game_id": 4,
+    "game_title": "Ghost of Yotei",
+    "game_genre": "Action-Adventure",
+    "game_category": "Action",
+    "game_platform": "PS5",
+    "game_price": 69.99,
+    "game_quantity": 110,
+    "game_discount_price": 64.99,
+    "game_description": "A sequel to the critically acclaimed Ghost of Tsushima, set in the snowy regions of Japan."
+  },
+  {
+    "game_id": 5,
+    "game_title": "Death Stranding 2",
+    "game_genre": "Action",
+    "game_category": "Action",
+    "game_platform": "PS5, PC",
+    "game_price": 59.99,
+    "game_quantity": 90,
+    "game_discount_price": 54.99,
+    "game_description": "The continuation of Hideo Kojima's enigmatic saga, exploring new mysteries in a post-apocalyptic world."
+  },
+  {
+    "game_id": 6,
+    "game_title": "Borderlands 4",
+    "game_genre": "First-Person Shooter",
+    "game_category": "Shooter",
+    "game_platform": "PS5, Xbox Series X/S, PC",
+    "game_price": 59.99,
+    "game_quantity": 130,
+    "game_discount_price": 49.99,
+    "game_description": "The latest entry in the looter-shooter franchise, offering new vault hunters and chaotic adventures."
+  },
+  {
+    "game_id": 7,
+    "game_title": "Fable",
+    "game_genre": "Action RPG",
+    "game_category": "RPG",
+    "game_platform": "Xbox Series X/S, PC",
+    "game_price": 59.99,
+    "game_quantity": 100,
+    "game_discount_price": 54.99,
+    "game_description": "A reboot of the beloved Fable series, bringing players back to the whimsical world of Albion."
+  },
+  {
+    "game_id": 8,
+    "game_title": "Metroid Prime 4: Beyond",
+    "game_genre": "Action-Adventure",
+    "game_category": "Action",
+    "game_platform": "Nintendo Switch",
+    "game_price": 59.99,
+    "game_quantity": 80,
+    "game_discount_price": 54.99,
+    "game_description": "Samus Aran returns in a new intergalactic adventure, facing off against unknown threats in deep space."
+  },
+  {
+    "game_id": 9,
+    "game_title": "Marvel 1943: Rise of Hydra",
+    "game_genre": "Action",
+    "game_category": "Action",
+    "game_platform": "PS5, Xbox Series X/S, PC",
+    "game_price": 59.99,
+    "game_quantity": 95,
+    "game_discount_price": 54.99,
+    "game_description": "An action-packed game set in the Marvel universe during World War II, focusing on the rise of Hydra."
+  },
+  {
+    "game_id": 10,
+    "game_title": "Slay the Spire 2",
+    "game_genre": "Roguelike Deck-Building",
+    "game_category": "Adventure",
+    "game_platform": "PC, Nintendo Switch",
+    "game_price": 29.99,
+    "game_quantity": 150,
+    "game_discount_price": 24.99,
+    "game_description": "The sequel to the popular deck-building game, introducing new characters, cards, and challenges."
+  }
 ]
