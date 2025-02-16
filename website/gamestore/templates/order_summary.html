@@ -41,7 +41,7 @@
                   {% endif %}
                   <td>£{{order_item.get_final_price}}
                     {% if order_item.item.game_discount_price %}
-                    <span class="badge bg-info">£{{order_item.get_amount_saved}}</span>
+                    <span class="badge bg-info">Saved £{{order_item.get_amount_saved}}</span>
                     {% endif %}
 
                     <a href="{{order_item.item.get_remove_from_cart_url}}" class="float-end">

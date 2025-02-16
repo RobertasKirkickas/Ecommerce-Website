@@ -10,7 +10,7 @@
 
 {% block content %}
 
-
+{% if user.is_authenticated and order.items.all %}
 <div class="py-5 text-center">
 
         {% if form.errors %}
@@ -33,6 +33,7 @@
 
 <div class="row g-5">
     <div class="col-md-7 col-lg-8">
+        
         <h4 class="mb-3">Billing address</h4>
         <form class="card-body" method="POST">
              {% csrf_token %}
@@ -52,7 +53,7 @@
 
                 <div class="col-12">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="you@example.com" required>
+                    <input name="email" type="email" class="form-control" id="email" placeholder="you@example.com" required>
                     <div class="invalid-feedback">Please enter a valid email address.</div>
                 </div>
 
@@ -79,18 +80,6 @@
                 </div>
             </div>
 
-            {% comment %} <hr class="my-4">
-
-            <div class="form-check">
-                <input type="checkbox" name="save_info" class="form-check-input" id="save_info">
-                <label class="form-check-label" for="save_info">Save as default address</label>
-            </div>
-
-            <div class="form-check">
-                <input type="checkbox" name="use_default" class="form-check-input" id="use_default">
-                <label class="form-check-label" for="use_default">Use default address : address</label>
-            </div> {% endcomment %}
-
             <hr class="my-4">
 
             <h4 class="mb-3">Payment</h4>
@@ -114,7 +103,7 @@
 
     <!-- Cart Section -->
   
-    {% if user.is_authenticated and order.items.all %}
+    
     <div class="col-md-5 col-lg-4">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Your cart</span>
@@ -143,6 +132,11 @@
                 <strong>£{{order.get_total}}</strong>
             </li>
         </ul>
+
+        {% else %}
+                <a href="{% url 'home' %}" class="btn btn-outline-dark">Continue Shopping</a>
+
+
     {% endif %}
 
     
