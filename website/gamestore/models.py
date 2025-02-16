@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.utils.text import slugify
+from django.core.validators import RegexValidator
 # Create your models here.
 
 CATEGORIES_choices = [
@@ -15,7 +16,10 @@ CATEGORIES_choices = [
     ('Sports', 'Sports')
 ]
 
-
+PAYMENT_CHOICES = (
+    ('S', 'Stripe'),
+    ('P', 'Paypal'),
+)
 
 class Games(models.Model):
     game_id = models.AutoField(primary_key=True)
@@ -103,3 +107,26 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
+    
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=20)
+    last_name = models.CharField(max_length=20)
+    email = models.EmailField()
+    street_address = models.CharField(max_length=200)
+    apartment_address = models.CharField(max_length=200, blank=True, null=True)
+    city = models.CharField(max_length=20)
+    post_code = models.CharField(max_length=10)
+    save_info = models.BooleanField(default=False)
+    default = models.BooleanField(default=False)
+    use_default = models.BooleanField(default=False)
+    payment_option = models.CharField(choices=PAYMENT_CHOICES, max_length=2)
+
+    def __str__(self):
+        return self.user.username
+
+    # Ensure only one default address per user
+    def save(self, *args, **kwargs):
+        if self.default:
+            Address.objects.filter(user=self.user, default=True).exclude(id=self.id).update(default=False)
+        super().save(*args, **kwargs)
