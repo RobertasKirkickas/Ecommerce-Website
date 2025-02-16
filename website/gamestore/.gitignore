@@ -5,3 +5,5 @@ __pycache__/
 *.pyc
 *.pyo
 
+website/db.sqlite3
+db.sqlite3

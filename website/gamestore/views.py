@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Games, Order, OrderItem
-from .forms import ContactForm
+from .models import Games, Order, OrderItem, Address
+from .forms import ContactForm, AddressForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 # For class-based views[CBV]
@@ -20,6 +20,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from django.utils import timezone
+from django.core.exceptions import ObjectDoesNotExist
 
 class HomeView(ListView):
     model = Games
@@ -44,10 +45,64 @@ def home(request):
     all_games = Games.objects.all()
     return render(request, 'index.html', {'games': all_games})
 
+class CheckoutView(View):
+    def get(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+        except ObjectDoesNotExist:
+            order = None  # Prevent errors if no active order exists
 
-def checkout(request):
-    return render(request, 'checkout.html')
+        context = {
+            'order': order
+        }
+        return render(self.request, 'checkout.html', context)
 
+    def post(self, *args, **kwargs):
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+        except ObjectDoesNotExist:
+            messages.error(self.request, "No active order found.")
+            return redirect('checkout')
+
+        # Get form data from POST request
+        first_name = self.request.POST.get('first_name')
+        last_name = self.request.POST.get('last_name')
+        email = self.request.POST.get('email')
+        street_address = self.request.POST.get('street_address')
+        apartment_address = self.request.POST.get('apartment_address', '')
+        city = self.request.POST.get('city')
+        post_code = self.request.POST.get('post_code')
+        payment_option = self.request.POST.get('payment_option')
+
+        # Validate required fields
+        if not all([first_name, last_name, email, street_address, city, post_code, payment_option]):
+            messages.error(self.request, "Please fill in all required fields.")
+            return redirect('checkout')
+
+        # Save info
+        address = Address.objects.create(
+            user=self.request.user,
+            first_name=first_name,
+            last_name=last_name,
+            email=email,
+            street_address=street_address,
+            apartment_address=apartment_address,
+            city=city,
+            post_code=post_code
+        )
+
+        # Save payment option and link info to order
+        order.address = address
+        order.payment_option = payment_option
+        order.ordered = True
+        order.save()
+
+        # Remove all items from the order
+        order.items.all().delete()  # Make the cart empty
+        messages.success(self.request, "Order Submitted!")
+        return redirect('checkout')
+
+        
 
 # CART
 @login_required
