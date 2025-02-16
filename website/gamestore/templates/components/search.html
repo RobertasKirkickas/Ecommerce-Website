@@ -1,0 +1,49 @@
+{% extends 'layouts/main_layout.html' %}
+
+{% block content %}
+
+
+    
+    <h1 class="fw-bold mb-4">Search Results</h1>
+
+    <div class="row g-4">
+        {% for game in search_games %}
+                <div class="col-md-4 col-lg-3">
+                    <div class="card game-card shadow-sm border-0 h-100">
+                        <!-- Game Image -->
+                        <div class="game-card-image position-relative">
+                            <img src="{{ game.image_url.url }}" class="card-img-top rounded-top" alt="{{ game.game_title }}">
+                            <div class="overlay">
+                                <a href="{% url 'game' game.slug %}" class="stretched-link"></a>
+                            </div>
+                        </div>
+
+                        <!-- Game Details -->
+                        <div class="card-body d-flex flex-column text-center">
+                            <h5 class="fw-bold text-truncate" title="{{ game.game_title }}">{{ game.game_title }}</h5>
+
+                            <div class="d-flex justify-content-center align-items-center">
+                              <p class="text-success fw-bold mb-0 mb-2 me-2">£{{ game.game_discount_price|default:game.game_price }}</p>
+
+                            {% if game.game_discount_price %}
+                            <p class="text-danger text-decoration-line-through fw-bold mb-2">£{{ game.game_price }}</p>
+
+                            {% endif %}
+                            </div>
+                            <div class="mt-auto">
+                              <a href="{% if game.slug %}{% url 'game' game.slug %}{% else %}# {% endif %}" class="btn btn-outline-dark btn-sm">
+                                <i class="bi bi-eye"></i>View Details
+                              </a>
+                              
+                            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+    {% empty %}
+    
+    <h2>No results found</h2>
+
+    {% endfor %}
+{% endblock %}
