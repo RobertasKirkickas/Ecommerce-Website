@@ -57,7 +57,7 @@ class GamesForm(forms.ModelForm):
             'game_platform': forms.TextInput(attrs={'placeholder': 'e.g. PC', 'class':'form-control'}),
             'game_price': forms.NumberInput(attrs={'placeholder': 'e.g. 15.99', 'class':'form-control'}),
             'game_quantity': forms.NumberInput(attrs={'placeholder': 'e.g. 5', 'class':'form-control'}),
-            'game_discount_price': forms.NumberInput(attrs={'placeholder': 'e.g. 9.99', 'class':'form-control'}),
+            'game_discount_price': forms.NumberInput(attrs={'placeholder': 'e.g. 9.99', 'class': 'form-control'}),
             'image_url': forms.ClearableFileInput(attrs={'class':'form-control'}),
             'game_description': forms.Textarea(attrs={'class':'form-control'})
         }

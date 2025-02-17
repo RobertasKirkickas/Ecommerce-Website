@@ -73,8 +73,7 @@
                 {{ request.user.username }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="#">My Profile</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li>
                   <form action="{% url 'logout' %}" method="POST" class="dropdown-item">
                     {% csrf_token %}
@@ -107,10 +106,10 @@
             <h3>Links</h3>
             <ul>
               <li>
-                <a href="index.html">Home</a>
+                <a href="{% url 'home' %}">Home</a>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <a href="{% url 'contact' %}">Contact</a>
               </li>
             </ul>
           </div>
