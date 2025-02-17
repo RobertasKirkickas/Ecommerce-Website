@@ -25,7 +25,8 @@
     
  
         <div class="container">
-          <img src="{% static 'images/logo.png' %}" alt="logo" />
+          <a href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="logo" /></a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -72,7 +73,7 @@
                 {{ request.user.username }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="#">Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
                 <li>
                   <form action="{% url 'logout' %}" method="POST" class="dropdown-item">
                     {% csrf_token %}
@@ -87,7 +88,15 @@
         </div>
       </nav>
     </header>
-
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-success alert-dismissible fade show alert-{{ message.tags }} w-50 mx-auto" role="alert">
+      {{message}}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      </button>
+    </div>
+    {% endfor %}
+{% endif %}
     <div class="container mt-5">
       <h1 class="fw-bold mb-4">Trending Games</h1>
   
