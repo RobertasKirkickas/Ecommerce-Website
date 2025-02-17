@@ -2,19 +2,24 @@ header {
     nav {
         background-color: $secondary-color;
     }
-    a,
-    a:hover,
-    a:active {
+    a {
         text-transform: uppercase;
         font-weight: 500px;
         color: $secondary-text-color;
+
+        &:hover {
+            color: $nav-link-color;
+        }
     }
     a.nav-link,
-    a.nav-link:hover,
+
     a.nav-link-active {
         text-transform: uppercase;
         font-weight: 500;
         color: $secondary-text-color
+    }
+    a.nav-link:hover {
+        color: $nav-link-color;
     }
 
     .search-bar {

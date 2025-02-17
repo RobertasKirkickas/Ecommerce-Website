@@ -8,7 +8,7 @@
     {% if user.is_authenticated %}
     <form class="text-center" action="{% url 'delete_profile' user.username %}" method="POST">
         {% csrf_token %}
-        <button type="submit" class="btn btn-danger">DELETE PROFILE</button>
+        <button type="submit" class="btn btn-danger">DELETE ACCOUNT</button>
     <a href="{% url 'profile' %}" class="btn btn-outline-dark btn-upd">Cancel</a>
     </form>
     </div>
