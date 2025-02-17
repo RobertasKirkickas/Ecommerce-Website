@@ -46,15 +46,22 @@
               </li>
 
               {% if user.is_authenticated and user.is_staff %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'ims' %}">Manage Games</a></li>
+                {% csrf_token %}
 
                 <li class="nav-item">
                   <a class="nav-link" href="/gamesapi">Manage API</a></li>
-              {% endif %}
-              {% if not user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a></li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="/admin">Admin Panel</a></li>
+
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'game_create' %}">Add Game</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'game_list' %}">Show Games</a>
+                </li>
+              {% else %}
+                <a class="nav-link" href="{% url 'login' %}">Login</a>
               {% endif %}
             </ul>
 
@@ -111,17 +118,26 @@
               <li>
                 <a href="{% url 'contact' %}">Contact</a>
               </li>
-              {% if user.is_authenticated and user.is_staff %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'ims' %}">Manage Games</a></li>
-
+                {% if user.is_authenticated and user.is_staff %}
                 <li class="nav-item">
-                <a class="nav-link" href="/gamesapi">Manage API</a></li>
-              {% endif %}
-              {% if not user.is_authenticated %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Login</a></li>
-              {% endif %}
+                  <a class="nav-link" href="/gamesapi">Manage API</a></li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin Panel</a></li>
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'game_create' %}">Add Game</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'game_list' %}">Show Games</a>
+                  </li>
+                {% endif %}
+                {% if not user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+                {% endif %}
+              
             </ul>
           </div>
           <div class="footer-section">
