@@ -1,0 +1,29 @@
+{% extends 'layouts/main_layout.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center text-center"> 
+        {% if user.is_authenticated %}
+        <h1 class="mb-3 fw-bold"><strong>Hi, {{ request.user.username }}<strong></h1>
+
+        <div class="col-md-3 mx-auto">
+            <div class="card shadow-lg border-0 p-4">
+                <!-- Action Buttons -->
+                <div class="d-flex gap-3 justify-content-center">
+                    <form action="{% url 'logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-dark">LOGOUT</button>
+                    </form>
+
+                    <a href="{% url 'profile_confirm_delete' %}" class="btn btn-outline-dark btn-del">Delete</a>
+                    
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.home, name='home'),
     path('contact/', views.contact_view, name='contact'),
+    path('profile/', views.profile, name="profile"),
     path('contact/success/', views.contact_success_view, name='contact-success'),
     path('checkout/', views.CheckoutView.as_view(), name='checkout'),
     path('order-summary/', views.OrderSummaryView.as_view(), name='order_summary'),
@@ -23,6 +24,8 @@ urlpatterns = [
     path('add-to-cart/<slug>/', views.add_to_cart, name='add_to_cart'),
     path('remove-from-cart/<slug>/', views.remove_from_cart, name='remove_from_cart'),
     path('remove-single-from-cart/<slug>/', views.remove_single_from_cart, name='remove_single_from_cart'),
+    path('delete-profile/<str:username>/', views.delete_profile, name='delete_profile'), 
+    path('profile-confirm-delete/', views.profile_confirm_delete, name='profile_confirm_delete'), 
 
 ]
 
