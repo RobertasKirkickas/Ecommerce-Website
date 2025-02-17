@@ -29,7 +29,7 @@ class Games(models.Model):
     game_platform = models.CharField(max_length=64)
     game_price = models.DecimalField(max_digits=7, decimal_places=2)  
     game_quantity = models.IntegerField()
-    game_discount_price = models.DecimalField(max_digits=7, decimal_places=2)  
+    game_discount_price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)  
     game_description = models.TextField()
     image_url = models.ImageField(upload_to='game-images/', default="game-images/default.png")
     slug = models.SlugField()
