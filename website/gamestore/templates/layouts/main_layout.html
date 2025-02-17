@@ -74,8 +74,7 @@
                 {{ request.user.username }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="#">My Profile</a></li>
-                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li>
                   <form action="{% url 'logout' %}" method="POST" class="dropdown-item">
                     {% csrf_token %}
