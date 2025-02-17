@@ -45,9 +45,29 @@ def home(request):
     all_games = Games.objects.all()
     return render(request, 'index.html', {'games': all_games})
 
-# def search(request, slug):
-#     all_games = Games.objects.all()
-#     return render(request, 'components/search.html', {'games': all_games})
+def profile(request):
+    return render(request, 'accounts/profile.html')
+
+def profile_confirm_delete(request):
+    return render(request, 'accounts/profile_confirm_delete.html')
+
+@login_required
+def delete_profile(request, username):
+    if request.method == "POST":
+        if request.user.username == username:  # Ensure user can only delete their own profile
+            try:
+                request.user.delete()
+                messages.success(request, "Your account has been deleted!")
+                return redirect('home')  # Redirect to homepage
+            except Exception as e:
+                messages.error(request, "An error occurred while deleting your account.")
+                return redirect('profile')  # Redirect back to profile page
+        else:
+            messages.error(request, "You can only delete your own profile.")
+            return redirect('profile')
+    
+    return render(request, 'accounts/profile.html')
+
 
 class SearchView(ListView):
     model = Games
