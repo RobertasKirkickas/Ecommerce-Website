@@ -16,7 +16,7 @@ from .serialisers import gamesSerializers
 from django.views.decorators.http import require_http_methods
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from django.views.generic import ListView, DetailView
 from django.contrib import messages
 from django.utils import timezone
@@ -355,10 +355,9 @@ def game_delete_view(request, game_id):
     return render(request, 'crud/game_confirm_delete.html', {'game': game})
 
 
-
-# API for Listing and Creating Games
+# API for Listing and Creating Games (Admin only)
 class gamesListCreate(generics.ListCreateAPIView):
-    permission_classes = (AllowAny,)
+    permission_classes = [IsAdminUser]  # Only admin users can access
     queryset = Games.objects.all()
     serializer_class = gamesSerializers
 
@@ -371,9 +370,9 @@ class gamesListCreate(generics.ListCreateAPIView):
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
-# API for Retrieving, Updating, and Deleting a Game
+# API for Retrieving, Updating, and Deleting a Game (Admin only)
 class gamesRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAdminUser]  # Only admin users can access
     queryset = Games.objects.all()
     serializer_class = gamesSerializers
     lookup_field = 'pk'  # Deleting using the primary key
-
