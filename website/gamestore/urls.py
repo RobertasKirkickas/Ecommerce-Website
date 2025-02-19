@@ -11,7 +11,6 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register_view, name='register'),
-    path('protected/', views.ProtectedView.as_view(), name='protected'),
     path('create/', views.game_create_view, name="game_create"),
     path('list/', views.game_list_view, name="game_list"),
     path('search/', views.SearchView.as_view(), name="search"),

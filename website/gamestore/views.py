@@ -22,9 +22,7 @@ from django.contrib import messages
 from django.utils import timezone
 from django.core.exceptions import ObjectDoesNotExist
 
-class HomeView(ListView):
-    model = Games
-    template_name = "index.html"
+
 
 class GameDetail(DetailView):
     model = Games
@@ -289,16 +287,6 @@ def logout_view(request):
 @login_required
 def home_view(request):
     return render(request, 'index.html')
-
-# Protected View - Inventory Management System and etc.
-class ProtectedView(LoginRequiredMixin, View):
-    login_url = '/login/'
-    # 'next' - to redirect URL
-    redirect_field_name = 'redirect_to'
-
-    def get(self, request):
-        return render(request, 'crud/index.html')
-    
 
 
 # Function to check if user is admin or moderator
