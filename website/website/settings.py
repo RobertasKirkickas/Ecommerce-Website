@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['rob-work.onrender.com', 'www.rob-work.onrender.com', '127.0.0.1']
 
 # Logs database queries
 # LOGGING = {
