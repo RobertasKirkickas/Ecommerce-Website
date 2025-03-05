@@ -162,7 +162,7 @@ if not DEBUG:
 
 
 
-MEDIA_URL = '/images/'
+MEDIA_URL = '/static/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
 
