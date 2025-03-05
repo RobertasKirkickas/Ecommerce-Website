@@ -43,9 +43,11 @@ def home(request):
     all_games = Games.objects.all()
     return render(request, 'index.html', {'games': all_games})
 
+@login_required
 def profile(request):
     return render(request, 'accounts/profile.html')
 
+@login_required
 def profile_confirm_delete(request):
     return render(request, 'accounts/profile_confirm_delete.html')
 
@@ -175,7 +177,8 @@ def add_to_cart(request, slug):
     else:
         messages.warning(request, "You need to log in to add items to your cart.")
         return redirect('login')  # Redirect to login page if user is not authenticated
-    
+
+@login_required    
 def remove_from_cart(request, slug):
     item = get_object_or_404(Games, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
@@ -195,6 +198,7 @@ def remove_from_cart(request, slug):
         messages.info(request, "You don't have an active order!")
         return redirect('order_summary')
 
+@login_required
 def remove_single_from_cart(request, slug):
     item = get_object_or_404(Games, slug=slug)
     order_item, created = OrderItem.objects.get_or_create(
@@ -280,13 +284,6 @@ def logout_view(request):
         return redirect('login')
     else:
         return redirect('home')
-
-# Home View
-# Using decorator
-
-@login_required
-def home_view(request):
-    return render(request, 'index.html')
 
 
 # Function to check if user is admin or moderator

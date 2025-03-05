@@ -5,6 +5,13 @@
 {% block body_id %}auth-page{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+
+<script>
+  window.location.href = "{% url 'home' %}";
+</script>
+
+{% else %}
       <h2>Register</h2>
 
       <form class="auth-form" method="POST" action="{% url 'register' %}">
@@ -12,5 +19,5 @@
         {{ form.as_p }}
         <button class="btn btn-outline-dark" type="submit">Register</button>
       </form>
-
+{% endif %}
       {% endblock  %}

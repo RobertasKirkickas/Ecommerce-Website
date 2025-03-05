@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+{% if user.is_authenticated and user.is_staff %}
   <div class="jumbotron text-center">
     <h1 class="display-4">Inventory Management System</h1>
     <p class="lead">You can manage your games here.</p>
@@ -12,4 +13,7 @@
     <p>Use the navigation to add, view, update or delete games.</p>
     <a href="{% url 'game_list' %}" class="btn btn-outline-dark btn-large" role="button">View Games</a>
   </div>
+  {% else %}
+  <H1>You have no access!</H1> <a href="{% url 'home' %}">Home</a>
+  {% endif %}
 {% endblock %}
