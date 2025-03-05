@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.utils.text import slugify
 from django.core.validators import RegexValidator
-# Create your models here.
 
+# Game categories
 CATEGORIES_choices = [
     ('RPG', 'RPG'),
     ('Fighting', 'Fighting'),
@@ -21,6 +21,7 @@ PAYMENT_CHOICES = (
     ('P', 'Paypal'),
 )
 
+# Defined model for game data
 class Games(models.Model):
     game_id = models.AutoField(primary_key=True)
     game_title = models.CharField(max_length=64)
@@ -92,6 +93,7 @@ class OrderItem(models.Model):
             return self.get_total_item_discount_price()
         return self.get_total_item_price()
 
+# Customer's order
 class Order(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     items = models.ManyToManyField(OrderItem)
@@ -107,7 +109,8 @@ class Order(models.Model):
         for order_item in self.items.all():
             total += order_item.get_final_price()
         return total
-    
+
+# Customer details collection on checkout    
 class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     first_name = models.CharField(max_length=20)

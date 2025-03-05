@@ -69,6 +69,7 @@ PAYMENT_CHOICES = (
     ('P', 'Paypal'),
 )
 
+# Form for customer to fill at the checkout
 class AddressForm(forms.Form):
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
