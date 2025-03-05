@@ -42,6 +42,7 @@
                 <a class="nav-link" href="/contact">Contact</a>
               </li>
               {% if user.is_authenticated and user.is_staff %}
+              {% csrf_token %}
               <li class="nav-item">
                 <a class="nav-link" href="{% url 'ims' %}">Manage Games</a></li>
 

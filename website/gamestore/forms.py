@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from .models import Games
-
+import re
 # Contact
 class ContactForm(forms.Form):
     name = forms.CharField(max_length=100)
@@ -14,12 +14,51 @@ class ContactForm(forms.Form):
 
 # AUTH
 class RegisterForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput)
-    password_confirm = forms.CharField(widget=forms.PasswordInput, label='Confirm Password')
+    username = forms.CharField(
+        max_length=150,
+        help_text=''
+    )
+    password = forms.CharField(
+        widget=forms.PasswordInput,
+        label="Password"
+    )
+    password_confirm = forms.CharField(
+        widget=forms.PasswordInput,
+        label="Confirm Password"
+    )
 
     class Meta:
         model = User
         fields = ['username', 'password', 'password_confirm']
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+
+        # Check minimum length
+        if len(username) < 4:
+            raise forms.ValidationError("Username must be at least 4 characters long.")
+
+        # Check for special symbols
+        if not re.match(r'^[a-zA-Z0-9]+$', username):  # Allows only letters, numbers, and underscore
+            raise forms.ValidationError("Username can only contain letters and numbers.")
+
+        return username
+    
+    # Ensures user uses strong password
+    def clean_password(self):
+        password = self.cleaned_data.get('password')
+
+        # 
+        if len(password) < 8:
+            raise forms.ValidationError("Password must be at least 8 characters long, including 1 uppercase letter, 1 special character, and 1 digit.")
+        if not any(char.isupper() for char in password):
+            raise forms.ValidationError("Password must contain at least 1 uppercase letter.")
+        if not any(char.isdigit() for char in password):
+            raise forms.ValidationError("Password must contain at least 1 digit.")
+        if not any(char in "!@#$%^&*()-_=+[{]};:'\",<.>/?`~" for char in password):
+            raise forms.ValidationError("Password must contain at least 1 special character.")
+
+        return password
 
     def clean(self):
         cleaned_data = super().clean()
@@ -29,6 +68,7 @@ class RegisterForm(forms.ModelForm):
         # Check if passwords match
         if password and password_confirm and password != password_confirm:
             raise forms.ValidationError("Passwords do not match!")
+
         return cleaned_data
 
 

@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 from .forms import RegisterForm
 from .forms import GamesForm
 from .serialisers import gamesSerializers
-from django.views.decorators.http import require_http_methods
+from django.views.decorators.http import require_http_methods, require_POST
 from rest_framework import generics, status
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
@@ -52,6 +52,7 @@ def profile_confirm_delete(request):
     return render(request, 'accounts/profile_confirm_delete.html')
 
 @login_required
+@require_POST
 def delete_profile(request, username):
     if request.method == "POST":
         if request.user.username == username:  # Ensure user can only delete their own profile
@@ -277,7 +278,7 @@ def login_view(request):
 
     return render(request, 'accounts/login.html', {'error': error_message})
 
-
+@login_required
 def logout_view(request):
     if request.method == "POST":
         logout(request)
