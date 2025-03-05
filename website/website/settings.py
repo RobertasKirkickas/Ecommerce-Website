@@ -77,7 +77,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+
 
 ROOT_URLCONF = 'website.urls'
 
@@ -145,13 +147,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
+
+# During development, you can use `STATICFILES_DIRS`
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Collects static files here
 
-MEDIA_URL = '/images/'
+# The directory where static files will be collected in production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # This will be collected here
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+if not DEBUG:
+    # Ensure that WhiteNoise is enabled for serving static files
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+
+# MEDIA_URL = '/static/images/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
 
 # MEDIA_ROOT = BASE_DIR / 'images'
 
