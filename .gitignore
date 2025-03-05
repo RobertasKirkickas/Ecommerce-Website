@@ -1,0 +1,11 @@
+/node_modules
+
+# Ignore Python cache and database
+__pycache__/
+*.pyc
+*.pyo
+
+website/db.sqlite3
+db.sqlite3
+.idea
+staticfiles
