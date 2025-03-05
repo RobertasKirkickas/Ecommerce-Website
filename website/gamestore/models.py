@@ -32,7 +32,7 @@ class Games(models.Model):
     game_quantity = models.IntegerField()
     game_discount_price = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)  
     game_description = models.TextField()
-    image_url = models.ImageField(upload_to='static/', default="static/default.png")
+    image_url = models.ImageField(upload_to='static/images/', default="static/images/default.png")
     slug = models.SlugField()
     
     def save(self, *args, **kwargs):
